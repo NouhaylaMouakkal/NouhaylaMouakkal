@@ -32,7 +32,7 @@ function Home() {
 
             <Col md={5} style={{ paddingBottom: 20 }}>
               <img
-                src={homeLogo}
+                src="https://cdni.iconscout.com/illustration/premium/thumb/businesswoman-showing-data-analysis-7172711-5826617.png?f=webp"
                 alt="home pic"
                 className="img-fluid"
                 style={{ maxHeight: "450px" }}

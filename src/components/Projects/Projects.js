@@ -57,8 +57,8 @@ function Projects() {
               isBlog={false}
               title="Career Recommendation System : N7 Career"
               description="N7Career project aims to create an interactive platform using Java (JavaFX) to help users explore career opportunities based on their skills. Users can register, input technical and non-technical skills, and receive job recommendations tailored to their profiles."
-              ghLink="https://github.com/soumyajit4419/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
+              ghLink="https://github.com/NouhaylaMouakkal/Career_Recommendation_System"
+              // demoLink=""
             />
           </Col>
 
