@@ -1,5 +1,5 @@
 # 💫 About Me:
-🎓 ### I'm a Big Data and Cloud Computing Engineering Student with a fervent interest in leveraging data to drive insights and innovations.<br><br>🔍 Passionate about everything concerning data, I delve into various domains including data science, data analytics, data engineering, big data engineering, business intelligence, and dataops.<br><br>🤝 Open to collaborating on projects and eager to expand my horizons in the dynamic realm of technology.
+### 🎓 I'm a Big Data and Cloud Computing Engineering Student with a fervent interest in leveraging data to drive insights and innovations.<br><br>🔍 Passionate about everything concerning data, I delve into various domains including data science, data analytics, data engineering, big data engineering, business intelligence, and dataops.<br><br>🤝 Open to collaborating on projects and eager to expand my horizons in the dynamic realm of technology.
 
 
 ## 🌐 Socials:
