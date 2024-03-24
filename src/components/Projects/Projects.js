@@ -27,7 +27,7 @@ function Projects() {
               title="Brain Tumor Segmentation"
               description="Brain Tumor Segmentation using NaSNET architecture with Tensorflow and Keras. The model was trained on the BraTS dataset , was able to segment the tumor from the MRI images with an accuracy of 80% and aide in accurate diagnosis and treatment planning."
               ghLink="https://github.com/Brain-Tumor-Segmentation-ENSET"
-              // demoLink=""
+              demoLink="https://braints-n7.netlify.app"
             />
           </Col>
           <Col md={4} className="project-card">
