@@ -6,6 +6,10 @@ import Aboutcard from "./AboutCard";
 import laptopImg from "../../Assets/soutenance pic2.png";
 import Toolstack from "./Toolstack";
 
+// Importez vos images de récompense ici
+import award1Image from "../../Assets/devjam.jpeg";
+import award2Image from "../../Assets/odc.jpg";
+
 function About() {
   return (
     <Container fluid className="about-section">
@@ -39,11 +43,36 @@ function About() {
 
         <Techstack />
 
-        {/* <h1 className="project-heading">
-          <strong className="purple">Tools</strong> I use
-        </h1>
-        <Toolstack /> */}
-
+        {/* Partie des récompenses */}
+        <div style={{ marginTop: "50px" }}>
+          <h1 className="project-heading">
+            <strong className="purple">Awards</strong>
+          </h1>
+          <Row>
+            {/* Première récompense */}
+            <Col md={6}>
+              <div className="award-card">
+              <img src={award1Image} alt="Award 1" className="award-img" style={{height: "200px", width: "auto", objectFit: "cover"}} />
+                <div className="award-details">
+                  <h2>Top 10 in DevJam Hackathon<sub style={{fontSize:"14"}}><i>Feb 2024</i> </sub></h2>
+                  <p>Ranked within the top 10 out of 50+ competing teams from various educational backgrounds, our journey was both challenging and enlightening. Although we didn't secure the first place, the experience proved transformative, providing us with invaluable insights and growth opportunities.</p>
+                  <p>Tech Stack : Anglar , Firebase , GCP </p>
+                </div>
+              </div>
+            </Col>
+            {/* Deuxième récompense */}
+            <Col md={6}>
+              <div className="award-card">
+              <img src={award2Image} alt="Award 2" className="award-img" style={{height: "200px", width: "auto", objectFit: "cover"}} />
+                <div className="award-details">
+                  <h2>3rd place - Orange Digital Center Champions, Morocco<sub style={{fontSize:"14"}}><i>Dec 2023</i> </sub></h2>
+                  <p>Achieved 3rd place with team N7Gangs in the Orange Digital Center Champions competition in Morocco. Showed expertise in problem-solving, understanding algorithms, and coding skills through the CodingGame platform. This award recognizes our teamwork and technical strength in a national programming competition.</p>
+                  <p>Tech Stack : python , javaScript</p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Container>
     </Container>
   );

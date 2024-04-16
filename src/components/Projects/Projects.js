@@ -7,6 +7,7 @@ import N7career from "../../Assets/Projects/RS N7 Career.png";
 import detection from "../../Assets/Projects/Object Detection.png";
 import safeguide from "../../Assets/Projects/safeguide.png";
 import bts from "../../Assets/Projects/BrainTumorSegmentation.png";
+import echosign from "../../Assets/Projects/EchoSign.png";
 import { de } from "date-fns/locale";
 function Projects() {
   return (
@@ -20,6 +21,16 @@ function Projects() {
           Here are a few projects I've worked on recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+          
+        <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={echosign}
+              isBlog={false} 
+              title="EchoSign: Moroccan Sign Language Translation App (Coming Soon)"
+              description="ETransforming Moroccan Sign Language into text and audio for seamless communication with the deaf community. Our Python-based app utilizes machine learning to analyze signs through an intuitive interface, fostering inclusivity and understanding. Transitioning text to audio enhances everyday interactions for deaf individuals in Morocco."
+              ghLink="https://github.com/NouhaylaMouakkal/EchoSign.git"
+            />
+          </Col>
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={bts}

@@ -4,9 +4,6 @@ import { CgCPlusPlus } from "react-icons/cg";
 import {
     DiPython,
     DiJava,
-    DiJavascript1,
-    DiPhp,
-    DiNodejs,
     DiMongodb,
     DiDocker,
     DiAngularSimple,
@@ -17,8 +14,11 @@ import {
   SiTensorflow,
   SiScikitlearn,
   SiPowerbi, 
-  SiMicrosoftazure,
+  SiOracle,
   SiSpring,
+  SiApachehadoop,
+  SiKeras,
+  SiJupyter
 
 } from "react-icons/si";
 import { TbBrandGolang } from "react-icons/tb";
@@ -36,6 +36,12 @@ function Techstack() {
         <SiScikitlearn />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
+      <SiKeras />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+      <SiJupyter />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
         <SiPowerbi />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
@@ -51,26 +57,20 @@ function Techstack() {
         <DiDocker />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiMicrosoftazure />
+        <SiOracle />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiApachehadoop />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <DiAngularSimple />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <DiJava />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <SiSpring />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiAngularSimple />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJavascript1 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiNodejs />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiPhp />
-      </Col>
+      </Col>  
     </Row>
   );
 }
