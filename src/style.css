@@ -521,8 +521,12 @@ html {
     background-color: #623686 !important;
     border-color: #623686 !important;
   }
+  .btn-outline-primary {
+    color: #fff !important;
+    border-color: #623686 !important;
+  }
   
-  .btn-primary:hover {
+  .btn-primary:hover , .btn-outline-primary:hover{
     color: #fff !important;
     background-color: #6d20c5d7 !important;
     border-color: #6d20c5d7 !important;

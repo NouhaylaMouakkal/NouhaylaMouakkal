@@ -1,26 +1,29 @@
 {
   "files": {
     "main.css": "/static/css/main.adf3f548.css",
-    "main.js": "/static/js/main.54af72da.js",
+    "main.js": "/static/js/main.488e7a54.js",
     "static/js/453.ace21015.chunk.js": "/static/js/453.ace21015.chunk.js",
+    "static/media/EchoSign.png": "/static/media/EchoSign.3b8ba7cd40bc7bf50135.png",
     "static/media/Object Detection.png": "/static/media/Object Detection.8dfb860bed022438253d.png",
     "static/media/ABB.png": "/static/media/ABB.768376ae42db24d50e7f.png",
     "static/media/BrainTumorSegmentation.png": "/static/media/BrainTumorSegmentation.539e8167db051b506e5d.png",
     "static/media/RS N7 Career.png": "/static/media/RS N7 Career.75c04ff8afa3058a7362.png",
+    "static/media/CV_Nouhayla_MOUAKKAL.pdf": "/static/media/CV_Nouhayla_MOUAKKAL.96f2b11bec061d1db87b.pdf",
     "static/media/safeguide.png": "/static/media/safeguide.201549a2094055f6ba4c.png",
-    "static/media/CV_Nouhayla_MOUAKKAL.pdf": "/static/media/CV_Nouhayla_MOUAKKAL.7ce4a0c114aa9e59528a.pdf",
     "static/media/soutenance pic2.png": "/static/media/soutenance pic2.bbd2d8ed10772f2800fd.png",
+    "static/media/devjam.jpeg": "/static/media/devjam.cb5f69fe707331424e21.jpeg",
     "static/media/home-main.svg": "/static/media/home-main.359935c39288e92d4dba5c9f2445b91d.svg",
+    "static/media/odc.jpg": "/static/media/odc.b66b03ca6b59e50fba49.jpg",
     "static/media/myavatar.png": "/static/media/myavatar.7d4eb0b7f0f495e7575f.png",
     "static/media/home-bg.jpg": "/static/media/home-bg.dc52d5d40a40b13154b0.jpg",
     "static/media/pre.svg": "/static/media/pre.4410c5baaa673cc131da.svg",
     "index.html": "/index.html",
     "main.adf3f548.css.map": "/static/css/main.adf3f548.css.map",
-    "main.54af72da.js.map": "/static/js/main.54af72da.js.map",
+    "main.488e7a54.js.map": "/static/js/main.488e7a54.js.map",
     "453.ace21015.chunk.js.map": "/static/js/453.ace21015.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.adf3f548.css",
-    "static/js/main.54af72da.js"
+    "static/js/main.488e7a54.js"
   ]
 }

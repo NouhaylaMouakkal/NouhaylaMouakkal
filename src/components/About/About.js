@@ -4,7 +4,7 @@ import Particle from "../Particle";
 import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
 import laptopImg from "../../Assets/soutenance pic2.png";
-import Toolstack from "./Toolstack";
+
 
 // Importez vos images de récompense ici
 import award1Image from "../../Assets/devjam.jpeg";
@@ -56,7 +56,7 @@ function About() {
                 <div className="award-details">
                   <h2>Top 10 in DevJam Hackathon<sub style={{fontSize:"14"}}><i>Feb 2024</i> </sub></h2>
                   <p>Ranked within the top 10 out of 50+ competing teams from various educational backgrounds, our journey was both challenging and enlightening. Although we didn't secure the first place, the experience proved transformative, providing us with invaluable insights and growth opportunities.</p>
-                  <p>Tech Stack : Anglar , Firebase , GCP </p>
+                  <p>Tech Stack : Anglar , Firebase , GCP , TailwindCSS</p>
                 </div>
               </div>
             </Col>

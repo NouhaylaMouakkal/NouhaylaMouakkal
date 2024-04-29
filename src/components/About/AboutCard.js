@@ -13,16 +13,16 @@ function AboutCard() {
             I'm Big Data & Cloud Computing Engineering Student at ENSET Mohammedia.
             <ul>
               <li className="about-activity">
-              <VscDebugBreakpointLogUnverified />Mentor at Digigirlz Morocco.
+              <VscDebugBreakpointLogUnverified />Mentor at <span className="purple">Digigirlz Morocco.</span>
               </li>
               <li className="about-activity">
-              <VscDebugBreakpointLogUnverified />Evaluator at LDX ENSET.
+              <VscDebugBreakpointLogUnverified />Evaluator at <span className="purple">LDX ENSET.</span>
               </li>
               <li className="about-activity">
-              <VscDebugBreakpointLogUnverified />Team Leader of Social Media Managers & Content Creator at N7 Geeks Aggregation.
+              <VscDebugBreakpointLogUnverified />Team Leader of Social Media Managers & Content Creator at <span className="purple"> N7 Geeks Aggregation.</span>
               </li>
               <li className="about-activity">
-              <VscDebugBreakpointLogUnverified />Member of GDSC ENSET Mohammedia.
+              <VscDebugBreakpointLogUnverified />Member of <span className="purple">GDSC ENSET Mohammedia.</span>
               </li>
             </ul>
             Apart from coding, some other activities that I love to do!
