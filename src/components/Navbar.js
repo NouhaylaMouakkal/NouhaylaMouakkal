@@ -5,7 +5,6 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { CgGitFork } from "react-icons/cg";
-import { SlEnvolopeLetter } from "react-icons/sl";
 
 import { ImBlog } from "react-icons/im";
 
@@ -91,16 +90,6 @@ function NavBar() {
                 onClick={() => updateExpanded(false)}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/coverletter"
-                onClick={() => updateExpanded(false)}
-              >
-                <SlEnvolopeLetter style={{ marginBottom: "2px" }} /> Cover Letter
               </Nav.Link>
             </Nav.Item>
 
