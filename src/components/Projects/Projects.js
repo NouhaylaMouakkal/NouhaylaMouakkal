@@ -7,8 +7,9 @@ import N7career from "../../Assets/Projects/RS N7 Career.png";
 import detection from "../../Assets/Projects/Object Detection.png";
 import safeguide from "../../Assets/Projects/safeguide.png";
 import bts from "../../Assets/Projects/BrainTumorSegmentation.png";
-import echosign from "../../Assets/Projects/EchoSign.png";
-import { de } from "date-fns/locale";
+import echosign from "../../Assets/Projects/Home.png";
+import crypto from "../../Assets/Projects/cryptoscolar.jpg";
+import n7guard from "../../Assets/Projects/N7Guard.png";
 function Projects() {
   return (
     <Container fluid className="project-section">
@@ -26,9 +27,40 @@ function Projects() {
             <ProjectCard
               imgPath={echosign}
               isBlog={false} 
-              title="EchoSign: Moroccan Sign Language Translation App (Coming Soon)"
+              title="EchoSign: Moroccan Sign Language Translation App "
               description="ETransforming Moroccan Sign Language into text and audio for seamless communication with the deaf community. Our Python-based app utilizes machine learning to analyze signs through an intuitive interface, fostering inclusivity and understanding. Transitioning text to audio enhances everyday interactions for deaf individuals in Morocco."
               ghLink="https://github.com/NouhaylaMouakkal/EchoSign.git"
+              demoLink="https://youtu.be/badtxnmgq_Y"
+            />
+          </Col>
+          {/* <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={echosign}
+              isBlog={false} 
+              title="WellBot: The 3D Anatomy Explorer for Aspiring Medical Professionals"
+              description="An immersive anatomy learning platform that combines 3D interactive models of the human body with layer-by-layer exploration, allowing students to peel back layers from skin to bones. It provides detailed descriptions of anatomical parts, interactive quizzes for knowledge assessment, and a medical chatbot assistant. The platform also includes a quiz mode tailored for medical students, complete with explanations, fostering a dynamic and comprehensive understanding of human anatomy."
+              ghLink="https://github.com/ElhoubeBrahim/health-tech-hackathon.git"
+              demoLink="https://youtu.be/8HAMyIxJGWI?si=bnGUi4pw4aH3tyEK"
+            />
+          </Col> */}
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={n7guard}
+              isBlog={false} 
+              title="N7 Guard: The AI Gatekeeper Against Phishing Attacks"
+              description="This project leverages artificial intelligence to develop a comprehensive phishing detection solution comprising a browser extension for real-time URL and email scanning, and intuitive web applications with detailed dashboards. By analyzing URLs, emails, images via OCR, and audio files, the system provides robust phishing protection across multiple formats, enhancing cybersecurity with user-friendly interfaces and detailed reporting."
+              ghLink="https://github.com/N7-Challenge-GEIW2/Hackathon-Final.git"
+              demoLink = ""
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={crypto}
+              isBlog={false} 
+              title="CryptMyData: AI-Powered Blockchain Solution for Student Admissions"
+              description="A blockchain-based solution that streamlines student applications for higher education in Morocco, featuring a secure system for recording student data on a blockchain with AI-assisted data extraction, and an entrance exam application system that verifies eligibility and facilitates the process. This project leverages blockchain, AI, and cybersecurity to enhance data security, transparency, efficiency, and integrity in managing student information and admissions."
+              ghLink="https://github.com/N7-Challenge-GEIW2/N7-Challenge-Project.git"
+              demoLink = "https://youtu.be/qPxQh0-OdSo"
             />
           </Col>
           <Col md={4} className="project-card">

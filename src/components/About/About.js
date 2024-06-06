@@ -3,12 +3,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import Particle from "../Particle";
 import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
-import laptopImg from "../../Assets/soutenance pic2.png";
+import laptopImg from "../../Assets/Me.png";
 
 
 // Importez vos images de récompense ici
-import award1Image from "../../Assets/devjam.jpeg";
-import award2Image from "../../Assets/odc.jpg";
+import award1Image from "../../Assets/competitions/devjam.jpeg";
+import award2Image from "../../Assets/competitions/odc.jpg";
 
 function About() {
   return (
