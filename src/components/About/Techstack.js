@@ -1,9 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { CgCPlusPlus } from "react-icons/cg";
 import {
     DiPython,
-    DiJava,
     DiMongodb,
     DiDocker,
     DiAngularSimple,
@@ -15,20 +13,21 @@ import {
   SiScikitlearn,
   SiPowerbi, 
   SiOracle,
-  SiSpring,
+  SiFlask,
   SiApachehadoop,
   SiKeras,
-  SiJupyter
-
+  SiJupyter,
+  SiMicrosoftazure,
+  SiPytorch,
+  SiOpencv,
+  SiApachecassandra,
+  SiOpenai
 } from "react-icons/si";
-import { TbBrandGolang } from "react-icons/tb";
+import { IoLogoFirebase } from "react-icons/io5";
 
 function Techstack() {
   return (
     <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiPython />
-      </Col>
       <Col xs={4} md={2} className="tech-icons">
         <SiTensorflow />
       </Col>
@@ -39,22 +38,49 @@ function Techstack() {
       <SiKeras />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
+      <SiPytorch />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+      <SiOpencv />
+      </Col>
+      {/*  */}
+      <Col xs={4} md={2} className="tech-icons">
       <SiJupyter />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <SiPowerbi />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
+        <DiPython />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <DiAngularSimple />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+        <SiFlask />
+      </Col> 
+      {/* DB */}
+      <Col xs={4} md={2} className="tech-icons">
         <SiMysql />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+      <IoLogoFirebase />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <DiMongodb />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <SiRedis />
+        <SiApachecassandra />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <DiDocker />
+        <SiRedis />
+      </Col>
+      {/*  */}
+      <Col xs={4} md={2} className="tech-icons">
+        <SiOpenai />
+      </Col>
+      <Col xs={4} md={2} className="tech-icons">
+      <SiMicrosoftazure />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
         <SiOracle />
@@ -63,14 +89,9 @@ function Techstack() {
         <SiApachehadoop />
       </Col>
       <Col xs={4} md={2} className="tech-icons">
-        <DiAngularSimple />
+        <DiDocker />
       </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <SiSpring />
-      </Col>  
+       
     </Row>
   );
 }

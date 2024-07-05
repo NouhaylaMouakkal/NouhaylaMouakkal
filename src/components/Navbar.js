@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { CgGitFork } from "react-icons/cg";
 
 import { ImBlog } from "react-icons/im";
+import { FaHashnode } from "react-icons/fa6";
 
 import {
   AiFillStar,
@@ -90,6 +91,16 @@ function NavBar() {
                 onClick={() => updateExpanded(false)}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="https://nouhaylamouakkal.hashnode.dev/"
+                onClick={() => updateExpanded(false)}
+              >
+                <FaHashnode style={{ marginBottom: "2px" }} /> Blogs
               </Nav.Link>
             </Nav.Item>
 
