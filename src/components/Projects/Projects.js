@@ -50,7 +50,7 @@ function Projects() {
               title="N7 Guard: The AI Gatekeeper Against Phishing Attacks"
               description="This project leverages artificial intelligence to develop a comprehensive phishing detection solution comprising a browser extension for real-time URL and email scanning, and intuitive web applications with detailed dashboards. By analyzing URLs, emails, images via OCR, and audio files, the system provides robust phishing protection across multiple formats, enhancing cybersecurity with user-friendly interfaces and detailed reporting."
               ghLink="https://github.com/N7-Challenge-GEIW2/Hackathon-Final.git"
-              demoLink = ""
+              demoLink = "https://youtu.be/tu4fzEORwcE"
             />
           </Col>
           <Col md={4} className="project-card">
