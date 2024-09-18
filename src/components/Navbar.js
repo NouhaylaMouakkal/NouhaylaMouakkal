@@ -5,9 +5,8 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { CgGitFork } from "react-icons/cg";
-
-import { ImBlog } from "react-icons/im";
 import { FaHashnode } from "react-icons/fa6";
+import { FaNewspaper } from "react-icons/fa6";
 
 import {
   AiFillStar,
@@ -101,6 +100,16 @@ function NavBar() {
                 onClick={() => updateExpanded(false)}
               >
                 <FaHashnode style={{ marginBottom: "2px" }} /> Blogs
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="https://www.ijcnis.org/index.php/ijcnis/article/view/6700"
+                onClick={() => updateExpanded(false)}
+              >
+                <FaNewspaper style={{ marginBottom: "2px" }} /> IJCNIS
               </Nav.Link>
             </Nav.Item>
 
