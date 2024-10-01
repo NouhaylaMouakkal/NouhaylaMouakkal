@@ -7,7 +7,7 @@ function Writings() {
       <Container fluid className="writings-section d-flex align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md={8} lg={6} className="text-center">
+            <Col md={8} lg={6} className="text-center text-white">
               <h1 className="mb-4">
                 Enjoy <span className="purple">Reading</span> My Writings
               </h1>
