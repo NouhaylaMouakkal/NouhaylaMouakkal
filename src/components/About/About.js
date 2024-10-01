@@ -1,9 +1,10 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Particle from "../Particle";
 import Techstack from "./Techstack";
 import Aboutcard from "./AboutCard";
 import laptopImg from "../../Assets/Me.png";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 // Importez vos images de récompense ici
 import award1Image from "../../Assets/competitions/devjam.jpeg";
@@ -42,6 +43,25 @@ function About() {
         </h1>
 
         <Techstack />
+
+        /* Partie des certifications */
+        <Row style={{ justifyContent: "center", marginTop: "50px" }}>
+          <h1 className="project-heading">
+            <strong className="White">Certifications</strong>
+          </h1>
+          <Col xs={12} md={6} className="text-center" style={{ marginTop: "20px" }}>
+            <Button 
+              variant="primary" 
+              className="certification-button"
+              style={{ padding: "10px 20px", fontSize: "1.2em", borderRadius: "5px" }}
+              href="https://www.linkedin.com/in/nouhaylamouakkal/details/certifications/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Check My Certifications <FaExternalLinkAlt />
+            </Button>
+          </Col>
+        </Row>
 
         {/* Partie des récompenses */}
         <div style={{ marginTop: "50px" }}>
