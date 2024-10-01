@@ -44,7 +44,7 @@ function About() {
 
         <Techstack />
 
-        /* Partie des certifications */
+        {/* Partie des certifications */}
         <Row style={{ justifyContent: "center", marginTop: "50px" }}>
           <h1 className="project-heading">
             <strong className="White">Certifications</strong>
