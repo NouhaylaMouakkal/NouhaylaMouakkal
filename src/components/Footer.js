@@ -33,7 +33,7 @@ return (
             </li>
             <li className="social-icons">
               <a
-                mailto="nouhaylamouakkal@gmail.com"
+                href="mailto:nouhaylamouakkal@gmail.com"
                 style={{ color: "white" }}
                 target="_blank" 
                 rel="noopener noreferrer"

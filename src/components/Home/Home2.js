@@ -20,7 +20,7 @@ function Home2() {
             </h1>
             <p className="home-about-body">
               Welcome to my Portfolio!
-              I am Nouhayla Mouakkal, a second-year Big Data & Cloud Computing engineering student.
+              I am Nouhayla Mouakkal, a third-year Big Data & Cloud Computing engineering student.
               I am a dedicated and results-oriented Data Scientist with a profound passion for extracting meaningful narratives from complex datasets.
               <br />
               My skills encompass <b className="purple">machine learning, statistical modeling, and data analysis.</b> Enabling me to transform intricate data into actionable insights that inform strategic decision-making.
@@ -52,14 +52,15 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  mailto="nouhaylamouakkal@gmail.com"
+                  href="mailto:nouhaylamouakkal@gmail.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="icon-colour  home-social-icons"
+                  className="icon-colour home-social-icons"
                 >
                   <AiFillMail />
                 </a>
               </li>
+
               <li className="social-icons">
                 <a
                   href="https://www.linkedin.com/in/nouhayla-mouakkal/"

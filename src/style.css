@@ -746,3 +746,33 @@ html {
     display: none !important;
   }
   
+  /* Writings */
+  .writings-section {
+    height: 100vh;
+    padding: 0;
+  }
+  
+  .custom-button {
+    background-color: #6C63FF;
+    border-color: #6C63FF;
+  }
+  
+  .custom-button:hover, .custom-button:focus {
+    background-color: #5A52D5;
+    border-color: #5A52D5;
+  }
+  
+  .purple {
+    color: #6C63FF;
+  }
+  
+  /* Ensure these styles apply to child components */
+  :global(.custom-button) {
+    background-color: #6C63FF;
+    border-color: #6C63FF;
+  }
+  
+  :global(.custom-button:hover), :global(.custom-button:focus) {
+    background-color: #5A52D5;
+    border-color: #5A52D5;
+  }
