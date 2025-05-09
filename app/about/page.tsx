@@ -21,7 +21,7 @@ export default function AboutPage() {
               <CardContent className="p-6 flex flex-col items-center">
                 <div className="w-48 h-48 rounded-full overflow-hidden mb-4">
                   <img
-                    src="/placeholder.svg?height=200&width=200"
+                    src="/MyPicture.png?height=200&width=200"
                     alt="Nouhayla Mouakkal"
                     className="w-full h-full object-cover"
                   />

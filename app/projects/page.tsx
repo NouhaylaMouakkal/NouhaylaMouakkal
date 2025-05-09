@@ -108,7 +108,7 @@ const projects = [
     technologies: ["Python", "Machine Learning", "Computer Vision", "TensorFlow"],
     github: "https://github.com/NouhaylaMouakkal/EchoSign.git",
     demo: "https://youtu.be/badtxnmgq_Y",
-    image: "/placeholder.svg?height=200&width=400&text=EchoSign",
+    image: "/Projects/EchoSign.png?height=200&width=400&text=EchoSign",
     category: "ai",
   },
   {
@@ -119,7 +119,7 @@ const projects = [
     technologies: ["AI", "Cybersecurity", "OCR", "Browser Extension"],
     github: "https://github.com/N7-Challenge-GEIW2/Hackathon-Final.git",
     demo: "https://youtu.be/tu4fzEORwcE",
-    image: "/placeholder.svg?height=200&width=400&text=N7Guard",
+    image: "/Projects/N7Guard.png?height=200&width=400&text=N7Guard",
     category: "ai",
   },
   {
@@ -129,7 +129,7 @@ const projects = [
     technologies: ["Blockchain", "AI", "Cybersecurity", "Data Security"],
     github: "https://github.com/N7-Challenge-GEIW2/N7-Challenge-Project.git",
     demo: "https://youtu.be/qPxQh0-OdSo",
-    image: "/placeholder.svg?height=200&width=400&text=CryptMyData",
+    image: "/Projects/cryptoscolar.jpg?height=200&width=400&text=CryptMyData",
     category: "web",
   },
   {
@@ -140,7 +140,7 @@ const projects = [
     technologies: ["Deep Learning", "Medical Imaging", "TensorFlow", "Keras"],
     github: "https://github.com/Brain-Tumor-Segmentation-ENSET",
     demo: "https://braints-n7.netlify.app",
-    image: "/placeholder.svg?height=200&width=400&text=BrainTS",
+    image: "/Projects/BrainTumorSegmentation.png?height=200&width=400&text=BrainTS",
     category: "ai",
   },
   {
@@ -151,7 +151,7 @@ const projects = [
     technologies: ["Geolocation", "Interactive Chat", "Web Development"],
     github: "https://github.com/AhmedHoussamBouzine/safeguide",
     demo: "https://safeguide.netlify.app/",
-    image: "/placeholder.svg?height=200&width=400&text=SafeGuide",
+    image: "/Projects/safeguide.png?height=200&width=400&text=SafeGuide",
     category: "web",
   },
   {
@@ -161,7 +161,7 @@ const projects = [
       "Led a comprehensive Banking Data Analysis project leveraging Machine Learning models and Power BI to extract valuable insights.",
     technologies: ["Data Analysis", "Machine Learning", "Power BI"],
     github: "https://github.com/NouhaylaMouakkal/Analyzing-banking-data",
-    image: "/placeholder.svg?height=200&width=400&text=BankingData",
+    image: "/Projects/ABB.png?height=200&width=400&text=BankingData",
     category: "data",
   },
   {
@@ -171,7 +171,7 @@ const projects = [
       "Interactive platform using Java (JavaFX) to help users explore career opportunities based on their skills.",
     technologies: ["Java", "JavaFX", "Recommendation System"],
     github: "https://github.com/NouhaylaMouakkal/Career_Recommendation_System",
-    image: "/placeholder.svg?height=200&width=400&text=N7Career",
+    image: "/Projects/RS N7 Career.png?height=200&width=400&text=N7Career",
     category: "data",
   },
   {
@@ -181,7 +181,7 @@ const projects = [
       "Implemented real-time object detection using OpenCV and SSD MobileNet model for security and surveillance applications.",
     technologies: ["OpenCV", "SSD MobileNet", "Computer Vision"],
     github: "https://github.com/NouhaylaMouakkal/Real-time-Object-Detection",
-    image: "/placeholder.svg?height=200&width=400&text=ObjectDetection",
+    image: "/Projects/Object Detection.png?height=200&width=400&text=ObjectDetection",
     category: "ai",
   },
 ]

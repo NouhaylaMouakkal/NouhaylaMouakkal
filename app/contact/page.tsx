@@ -1,9 +1,6 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useRef } from "react"
-import ParticleBackground from "@/components/particle-background"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -17,7 +14,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
     if (!formRef.current) return
@@ -25,19 +22,26 @@ export default function ContactPage() {
     try {
       setIsSubmitting(true)
 
-      // Replace with your EmailJS service ID, template ID, and public key
-      await emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formRef.current, "YOUR_PUBLIC_KEY")
+      // Replace these with your actual EmailJS credentials
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("EmailJS environment variables are not properly configured.")
+      }
+      await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
 
       toast({
-        title: "Message sent!",
+        title: "Message sent successfully!",
         description: "Thank you for your message. I'll get back to you soon.",
       })
 
       formRef.current.reset()
     } catch (error) {
-      console.error(error)
+      console.error("Error sending email:", error)
       toast({
-        title: "Error sending message",
+        title: "Failed to send message",
         description: "Please try again later or contact me directly via email.",
         variant: "destructive",
       })
@@ -47,14 +51,14 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="relative min-h-screen">
-      <ParticleBackground />
+    <div className="relative min-h-screen bg-background">
       <Toaster />
 
       <section className="container py-16 md:py-24">
-        <h1 className="section-heading mb-12">Get In Touch</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">Get In Touch</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Information */}
           <div>
             <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
             <p className="text-lg mb-8">
@@ -69,8 +73,8 @@ export default function ContactPage() {
                   <div>
                     <CardTitle className="text-base mb-1">Email</CardTitle>
                     <CardDescription>
-                      <a href="mailto:nouhaylamouakkal@gmail.com" className="hover:text-primary transition-colors">
-                        nouhaylamouakkal@gmail.com
+                      <a href="mailto:youremail@example.com" className="hover:text-primary transition-colors">
+                        youremail@example.com
                       </a>
                     </CardDescription>
                   </div>
@@ -82,7 +86,7 @@ export default function ContactPage() {
                   <MapPin className="h-6 w-6 text-primary mr-4" />
                   <div>
                     <CardTitle className="text-base mb-1">Location</CardTitle>
-                    <CardDescription>Casablanca, Morocco</CardDescription>
+                    <CardDescription>Your City, Country</CardDescription>
                   </div>
                 </CardContent>
               </Card>
@@ -92,7 +96,7 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 text-primary mr-4" />
                   <div>
                     <CardTitle className="text-base mb-1">Phone</CardTitle>
-                    <CardDescription>+212 618-068186</CardDescription>
+                    <CardDescription>+1 234 567 890</CardDescription>
                   </div>
                 </CardContent>
               </Card>
@@ -102,7 +106,7 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold mb-4">Connect with me</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://github.com/NouhaylaMouakkal"
+                  href="https://github.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
@@ -111,7 +115,7 @@ export default function ContactPage() {
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/nouhayla-mouakkal/"
+                  href="https://www.linkedin.com/in/yourusername/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
@@ -120,16 +124,16 @@ export default function ContactPage() {
                   <span className="sr-only">LinkedIn</span>
                 </a>
                 <a
-                  href="mailto:nouhaylamouakkal@gmail.com"
+                  href="mailto:youremail@example.com"
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
                 >
                   <Mail className="h-6 w-6" />
                   <span className="sr-only">Email</span>
                 </a>
                 <a
-                  href="https://www.instagram.com/nouhayla.mkl1"
+                  href="https://www.instagram.com/yourusername"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer" 
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
                 >
                   <Instagram className="h-6 w-6" />
@@ -139,6 +143,7 @@ export default function ContactPage() {
             </div>
           </div>
 
+          {/* Contact Form */}
           <div>
             <Card>
               <CardHeader>
@@ -148,17 +153,17 @@ export default function ContactPage() {
               <CardContent>
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
+                    <label htmlFor="user_name" className="text-sm font-medium">
                       Name
                     </label>
-                    <Input id="name" name="name" placeholder="Your name" required />
+                    <Input id="user_name" name="user_name" placeholder="Your name" required />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
+                    <label htmlFor="user_email" className="text-sm font-medium">
                       Email
                     </label>
-                    <Input id="email" name="email" type="email" placeholder="Your email" required />
+                    <Input id="user_email" name="user_email" type="email" placeholder="Your email" required />
                   </div>
 
                   <div className="space-y-2">

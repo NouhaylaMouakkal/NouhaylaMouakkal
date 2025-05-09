@@ -16,35 +16,6 @@ export default function WritingsPage() {
         </h1>
         <p className="text-center text-muted-foreground mb-8">Articles, blog posts, and research papers I've written</p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {writings.map((writing, index) => (
-            <Card key={index} className="project-card overflow-hidden flex flex-col">
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={writing.image || "/placeholder.svg?height=200&width=400&text=Article"}
-                  alt={writing.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardContent className="p-6 flex-1">
-                <div className="flex justify-between items-start mb-2">
-                  <Badge variant="outline">{writing.type}</Badge>
-                  <span className="text-sm text-muted-foreground">{writing.date}</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{writing.title}</h3>
-                <p className="text-muted-foreground">{writing.description}</p>
-              </CardContent>
-              <CardFooter className="px-6 pb-6 pt-0">
-                <Button asChild variant="default" className="w-full">
-                  <Link href={writing.url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-2 h-4 w-4" /> Read Article
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-
         <div className="mt-12 flex flex-col md:flex-row gap-6 justify-center">
           <Card className="md:w-1/2 project-card">
             <CardContent className="p-6">
@@ -77,7 +48,38 @@ export default function WritingsPage() {
               </Button>
             </CardContent>
           </Card>
+        </div> 
+
+        <div className="grid mt-12 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {writings.map((writing, index) => (
+            <Card key={index} className="project-card overflow-hidden flex flex-col">
+              <div className="h-48 overflow-hidden">
+                <img
+                  src={writing.image || "/placeholder.svg?height=200&width=400&text=Article"}
+                  alt={writing.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardContent className="p-6 flex-1">
+                <div className="flex justify-between items-start mb-2">
+                  <Badge variant="outline">{writing.type}</Badge>
+                  <span className="text-sm text-muted-foreground">{writing.date}</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{writing.title}</h3>
+                <p className="text-muted-foreground">{writing.description}</p>
+              </CardContent>
+              <CardFooter className="px-6 pb-6 pt-0">
+                <Button asChild variant="default" className="w-full">
+                  <Link href={writing.url} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="mr-2 h-4 w-4" /> Read Article
+                  </Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
+
+       
       </section>
     </div>
   )
