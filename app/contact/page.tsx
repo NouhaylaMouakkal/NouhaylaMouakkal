@@ -73,8 +73,8 @@ export default function ContactPage() {
                   <div>
                     <CardTitle className="text-base mb-1">Email</CardTitle>
                     <CardDescription>
-                      <a href="mailto:youremail@example.com" className="hover:text-primary transition-colors">
-                        youremail@example.com
+                      <a href="mailto:mouakkalnouhayla@gmail.com" className="hover:text-primary transition-colors">
+                        mouakkalnouhayla@gmail.com
                       </a>
                     </CardDescription>
                   </div>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                   <MapPin className="h-6 w-6 text-primary mr-4" />
                   <div>
                     <CardTitle className="text-base mb-1">Location</CardTitle>
-                    <CardDescription>Your City, Country</CardDescription>
+                    <CardDescription>Casablanca, Morocco</CardDescription>
                   </div>
                 </CardContent>
               </Card>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 text-primary mr-4" />
                   <div>
                     <CardTitle className="text-base mb-1">Phone</CardTitle>
-                    <CardDescription>+1 234 567 890</CardDescription>
+                    <CardDescription>+212 618068186</CardDescription>
                   </div>
                 </CardContent>
               </Card>
@@ -106,7 +106,7 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold mb-4">Connect with me</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/NouhaylaMouakkal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
@@ -115,7 +115,7 @@ export default function ContactPage() {
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/yourusername/"
+                  href="https://www.linkedin.com/in/nouhaylamouakkal/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
@@ -124,14 +124,14 @@ export default function ContactPage() {
                   <span className="sr-only">LinkedIn</span>
                 </a>
                 <a
-                  href="mailto:youremail@example.com"
+                  href="mailto:mouakkalnouhayla@gmail.com"
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
                 >
                   <Mail className="h-6 w-6" />
                   <span className="sr-only">Email</span>
                 </a>
                 <a
-                  href="https://www.instagram.com/yourusername"
+                  href="https://www.instagram.com/nouhayla.mkl1"
                   target="_blank"
                   rel="noopener noreferrer" 
                   className="bg-card hover:bg-primary hover:text-primary-foreground transition-colors p-3 rounded-full"
