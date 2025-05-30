@@ -369,7 +369,92 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              className="absolute top-1/2 -right-8 bg-card p-4 rounded-full shadow-lg        <motion.section 
+              className="absolute top-1/2 -right-8 bg-card p-4 rounded-full shadow-lg flex items-center justify-center"
+              animate={{
+                y: [0, 15, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+                delay: 2,
+              }}
+            >
+              <Code className="h-8 w-8 text-primary" />
+            </motion.div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal direction="left">
+          <div className="space-y-8">
+            <motion.h3 
+              className="text-4xl md:text-5xl font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
+                Passionate AI Engineer
+              </span>
+              <br />
+              <span className="text-gray-300">& Data Scientist</span>
+            </motion.h3>
+            
+            <motion.div 
+              className="space-y-6 text-lg text-gray-300 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <p>
+                Welcome to my digital realm! I'm <strong className="text-purple-400">Nouhayla Mouakkal</strong>, 
+                a third-year Big Data & Cloud Computing engineering student with an insatiable curiosity for 
+                artificial intelligence and data science.
+              </p>
+              <p>
+                I specialize in transforming complex datasets into actionable insights through{" "}
+                <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                  machine learning, neural networks, and statistical modeling
+                </span>
+                . My passion lies in building AI solutions that push the boundaries of what's possible.
+              </p>
+              <p>
+                From developing sophisticated ML pipelines to architecting cloud-native AI systems, 
+                I'm dedicated to creating technology that makes a meaningful impact.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="pt-6 flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Button 
+                asChild 
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300"
+              >
+                <Link href="/about">
+                  Learn More About Me
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button 
+                asChild 
+                variant="outline"
+                className="border-purple-500/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 transform hover:scale-105 transition-all duration-300"
+              >
+                <Link href="/contact">Get In Touch</Link>
+              </Button>
+            </motion.div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </div>
+  </section>
+
+{/* Enhanced CTA Section */}
+        <motion.section 
           className="py-24 relative overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
