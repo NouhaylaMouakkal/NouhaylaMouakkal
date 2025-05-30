@@ -12,7 +12,6 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Nouhayla MOUAKKAL - Portfolio",
   description: "AI Consultant & Big Data Engineering Student",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({

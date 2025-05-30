@@ -6,9 +6,12 @@ import { ModeToggle } from "./mode-toggle"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
+import { motion } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,28 +25,50 @@ const Navbar = () => {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
+    { href: "/experience", label: "Experience" },
     { href: "/skills", label: "Skills" },
     { href: "/projects", label: "Projects" },
-    { href: "/writings", label: "Writings" },
     { href: "/contact", label: "Contact" },
   ]
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled ? "bg-background/80 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold text-primary">NM</span>
+          <motion.span
+            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-500 bg-clip-text text-transparent"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            NM
+          </motion.span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-foreground/80 hover:text-primary transition-colors">
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`relative text-foreground/80 hover:text-primary transition-colors ${
+                pathname === link.href ? "text-primary font-medium" : ""
+              }`}
+            >
               {link.label}
+              {pathname === link.href && (
+                <motion.span
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary"
+                  layoutId="navbar-underline"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
             </Link>
           ))}
           <ModeToggle />
@@ -65,7 +90,9 @@ const Navbar = () => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-foreground/80 hover:text-primary transition-colors py-2"
+                    className={`text-foreground/80 hover:text-primary transition-colors py-2 ${
+                      pathname === link.href ? "text-primary font-medium" : ""
+                    }`}
                   >
                     {link.label}
                   </Link>
@@ -75,7 +102,7 @@ const Navbar = () => {
           </Sheet>
         </div>
       </div>
-    </header>
+    </motion.header>
   )
 }
 
