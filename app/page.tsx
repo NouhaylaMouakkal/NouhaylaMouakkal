@@ -160,11 +160,10 @@ export default function Home() {
                   >
                     <TypingEffect
                       texts={[
-                        "Neural Network Architect", 
                         "AI Solutions Engineer", 
-                        "Machine Learning Innovator",
-                        "Big Data Specialist",
-                        "Cloud Computing Expert"
+                        "Machine Learning Entheusist",
+                        "Prompt Engineer",
+                        "Hooked on AI Automation"
                       ]}
                     />
                   </motion.div>

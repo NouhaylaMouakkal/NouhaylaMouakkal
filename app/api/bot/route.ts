@@ -10,61 +10,72 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 // Very specific context about Nouhayla Mouakkal for the AI model
 const nouhaylaContext = `
   Nouhayla Mouakkal's Profile:
-  - **Full Name**: Nouhayla Mouakkal [cite: 1]
-  - **Current Role**: Big Data and Cloud Computing Engineering Student - AI Consultant Intern [cite: 1]
+  - **Full Name**: Nouhayla Mouakkal
+  - **Current Role**: Currently Third year Big Data and Cloud Computing Engineering Student - AI Consultant Intern 
   - **Contact**:
-    - Phone: +212 618-068186 [cite: 1]
-    - Email: mouakkalnouhayla@gmail.com [cite: 1]
-    - LinkedIn: in/nouhayla-mouakkal [cite: 1]
-    - Website: mouakkal.netlify.app [cite: 1]
-    - Location: Morocco [cite: 1]
+    - Phone: +212 618-068186
+    - Email: mouakkalnouhayla@gmail.com 
+    - LinkedIn: in/nouhayla-mouakkal 
+    - Website: mouakkal.netlify.app 
+    - Location: Morocco 
+    - From : live between Casablanca and larache and she born in Oujda
 
   - **Education**:
-    - Engineer's Degree in Computer Engineering: Big Data and Cloud Computing (2022-2025) at National Higher School of Technical Education (ENSET), Mohammedia [cite: 2]
-    - DGUS in Mathematics and Computer Science (2020-2022) at Polydisciplinary Faculty, Larache [cite: 2]
-    - Baccalaureate in Mathematical Sciences A (2019-2020) at Abdelali Benchakroune High School, Larache [cite: 2]
+    - Engineer's Degree in Computer Engineering: Big Data and Cloud Computing (2022-2025) at National Higher School of Technical Education (ENSET), Mohammedia 
+    - DGUS in Mathematics and Computer Science (2020-2022) at Polydisciplinary Faculty, Larache 
+    - Baccalaureate in Mathematical Sciences A (2019-2020) at Abdelali Benchakroune High School, Larache
 
   - **Professional Experience**:
-    - **AI Consultant Intern at ITSS** (04/02/2025-Present, Casablanca) [cite: 3]
-      - Project: LearNia: Next-Generation AI-Powered Learning Management System Through Intelligent Automation [cite: 3]
-      - Responsibilities: Developed LearNia, an AI-powered SaaS LMS with multimodal content generation, personalized AI tutoring, VR classrooms, and student analytics [cite: 3]
-    - **AI & Data Analyst Intern at Oklever** (10/06/2024-10/08/2024, Casablanca) [cite: 4]
-      - Project: Strategic Insight Pro-AI-Powered Decision-Making for CEOs [cite: 4]
-      - Responsibilities: Built Strategic Insight Pro, an AI platform delivering real-time analytics, AI-driven scenario planning, and a strategic chatbot with NLP and Retrieval-Augmented Generation [cite: 5]
-    - **Data Scientist Intern at AL Barid Bank** (03/07/2023-31/07/2023, Rabat) [cite: 6]
-      - Responsibilities: Conducted banking data analysis using Python and machine learning (PCA, SVM, KNN), developed customer segmentation models, built Power BI dashboards, and optimized model performance [cite: 6]
+    - **AI Consultant Intern at ITSS** (04/02/2025-Present, Casablanca) 
+      - Project: LearNia: Next-Generation AI-Powered Learning Management System Through Intelligent Automation 
+      - Responsibilities: Developed LearNia, an AI-powered SaaS LMS with multimodal content generation, personalized AI tutoring, VR classrooms, and student analytics 
+    - **AI & Data Analyst Intern at Oklever** (10/06/2024-10/08/2024, Casablanca) 
+      - Project: Strategic Insight Pro-AI-Powered Decision-Making for CEOs 
+      - Responsibilities: Built Strategic Insight Pro, an AI platform delivering real-time analytics, AI-driven scenario planning, and a strategic chatbot with NLP and Retrieval-Augmented Generation 
+    - **Data Scientist Intern at AL Barid Bank** (03/07/2023-31/07/2023, Rabat) 
+      - Responsibilities: Conducted banking data analysis using Python and machine learning (PCA, SVM, KNN), developed customer segmentation models, built Power BI dashboards, and optimized model performance 
 
   - **Technical Skills**:
-    - Machine Learning / Deep Learning / NLP: Scikit-learn, TensorFlow, Keras, PyTorch, NLTK, Voice Cloning [cite: 7]
-    - Computer Vision / Image Processing: OpenCV, MediaPipe, TesseractOCR, PIL, YOLO [cite: 7]
-    - Generative AI: Retrieval-Augmented Generation (RAG), Fine-Tuning, Prompt Engineering, LLMs (Large Language Models), FAISS, Qdrant, ChromaDB, Langchain, Agentic AI, Deep Search [cite: 7]
-    - Data Analytics / Big Data: NumPy, Pandas, Matplotlib, Seaborn, PySpark, Hadoop, Kafka, DAX, Excel, ETL Processes [cite: 7]
-    - Data Visualization: Power BI, Tableau, Prometheus, Grafana [cite: 7]
-    - Databases: MySQL, Postgresql, MongoDB, Firebase, Cassandra, Redis, HBase, Supabase [cite: 7]
-    - Cloud Computing & MLOps: Azure, Google Cloud (GCP), Oracle Cloud Infrastructure (OCI), Groq Cloud, Docker, Kubernetes, ZenML [cite: 8]
-    - Software Engineering: Python, C/C++, R, SQL, Flask, FastAPI, Spring, Express, Angular, Next.js, Tailwind CSS, Prisma ORM, Bash [cite: 8]
+    - Machine Learning / Deep Learning / NLP: Scikit-learn, TensorFlow, Keras, PyTorch, NLTK, Voice Cloning 
+    - Computer Vision / Image Processing: OpenCV, MediaPipe, TesseractOCR, PIL, YOLO 
+    - Generative AI: Retrieval-Augmented Generation (RAG), Fine-Tuning, Prompt Engineering, LLMs FAISS, Qdrant , ChromaDB , Langchain, Agentic AI , Deep Search
+    - Agentic AI : System Prompt Engineering, Tool-augmented Inferencing , CrewAI , Pydantic-AI, MCP , A2A
+    - Data Analytics / Big Data: NumPy, Pandas, Matplotlib, Seaborn, PySpark, Hadoop, Kafka, DAX, Excel, ETL Processes 
+    - Data Visualization: Power BI, Tableau, Prometheus, Grafana 
+    - Databases: MySQL, Postgresql, MongoDB, Firebase, Cassandra, Redis, HBase, Supabase 
+    - Cloud Computing & MLOps: Azure, Google Cloud (GCP), Oracle Cloud Infrastructure (OCI), Groq Cloud, Docker, Kubernetes, ZenML 
+    - Software Engineering: Python, C/C++, R, SQL, Flask, FastAPI, Spring, Express, Angular, Next.js, Tailwind CSS, Prisma ORM, Bash 
 
-  - **Soft Skills**: Analytical thinking and problem-solving, Teamwork and collaboration, Time Management, Agility and Adaptability, Effective communication, Stress Management [cite: 8]
+  - **Soft Skills**: Analytical thinking and problem-solving, Teamwork and collaboration, Time Management, Agility and Adaptability, Effective communication, Stress Management 
 
   - **Certifications**:
-    - OCI Generative AI Professional (Oracle) [cite: 8]
-    - Oracle Cloud Infrastructure Foundations I (Oracle) [cite: 8]
-    - Fundamentals AI Concepts (Microsoft) [cite: 8]
-    - Get Started with Data Analytics (Microsoft) [cite: 8]
-    - Python for Data Science (Cognitive Class) [cite: 8]
-    - Deep Learning with TensorFlow (Cognitive Class) [cite: 8]
+    - OCI Generative AI Professional (Oracle) 
+    - Oracle Cloud Infrastructure Foundations I (Oracle) 
+    - Fundamentals AI Concepts (Microsoft) 
+    - Get Started with Data Analytics (Microsoft) 
+    - Python for Data Science (Cognitive Class) 
+    - Deep Learning with TensorFlow (Cognitive Class) 
 
   - **Achievements & Volunteering**:
-    - Mentor: DigiGirlz Morocco [cite: 8]
-    - Evaluator: LDX ENSET [cite: 8]
-    - Team Leader of Social Media Managers: N7 Geeks [cite: 9]
-    - 2nd Place in N7-Challenge National Hackathon [cite: 8]
-    - 3rd Place in Orange Digital Center Champions [cite: 9]
+    - Mentor: DigiGirlz Morocco 
+    - Evaluator: LDX ENSET 
+    - Team Leader of Social Media Managers: N7 Geeks 
+    - GEIW Event Organizor during two years : ENSET Mohammedia
+    - 2nd Place in N7-Challenge National Hackathon 
+    - 3rd Place in Orange Digital Center Champions 
 
   - **Languages**:
-    - Arabic: Native [cite: 9]
-    - English: Professional [cite: 9]
-    - French: Professional [cite: 9]
+    - Arabic: Native 
+    - English: Professional 
+    - French: Professional 
+  - **Research Paper** :
+    - "Robust Email Phishing Detection using Machine Learning and Deep Learning Approach" published in the
+    International Journal of Communication Networks and Information Security (IJCNIS), August 2024. The study proposes
+    an efficient phishing email detection method using machine learning and deep learning techniques, achieving high
+    accuracy with minimal execution time. 
+    - Link of paper (https://www.ijcnis.org/index.php/ijcnis/article/view/6700)
+
+  - I'M OPEN TO WORK , Looking for a permanent full-time role (CDI)
 
   This AI assistant is designed to provide information about Nouhayla Mouakkal based solely on the provided context.
 `;

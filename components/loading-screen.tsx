@@ -111,7 +111,7 @@ const LoadingScreen = ({ finishLoading }: LoadingScreenProps) => {
           transition={{ duration: 0.05 }}
         />
       </div>
-      <p className="mt-4 text-muted-foreground">Loading your experience...</p>
+      <p className="mt-4 text-muted-foreground">Loading...</p>
     </div>
   )
 }
