@@ -1,88 +1,99 @@
 import Link from "next/link"
-import { Github, Linkedin, Mail, Instagram } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react"
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear()
+const socialLinks = [
+  { href: "https://github.com/NouhaylaMouakkal", label: "GitHub", icon: Github },
+  { href: "https://www.linkedin.com/in/nouhaylamouakkal/", label: "LinkedIn", icon: Linkedin },
+  { href: "mailto:mouakkalnouhayla@gmail.com", label: "Email", icon: Mail },
+]
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/skills", label: "Skills" },
+  { href: "/projects", label: "Projects" },
+  { href: "/contact", label: "Contact" },
+]
+
+export default function Footer() {
+  const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-background border-t border-border py-8">
-      <div className="container grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h3 className="text-xl font-bold mb-4">Nouhayla Mouakkal</h3>
-          <p className="text-muted-foreground">AI Consultant & Big Data Engineering Student</p>
-        </div>
+    <footer className="border-t border-white/[0.06] bg-background">
+      <div className="container py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+          {/* Brand */}
+          <div className="md:col-span-5 space-y-6">
+            <Link href="/" className="inline-block">
+              <span className="font-display text-2xl font-bold">
+                <span className="text-foreground">Nouhayla</span>
+                <span className="text-primary">.</span>
+              </span>
+            </Link>
+            <p className="text-muted-foreground max-w-sm leading-relaxed">
+              AI Engineer & Product Thinker crafting intelligent systems at the intersection of machine learning,
+              user experience, and scalable engineering.
+            </p>
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  className="group flex items-center justify-center w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+          </div>
 
-        <div>
-          <h3 className="text-xl font-bold mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors">
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
+          {/* Navigation */}
+          <div className="md:col-span-3 md:col-start-7">
+            <h3 className="label mb-6">Navigation</h3>
+            <ul className="space-y-3">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="group inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div>
-          <h3 className="text-xl font-bold mb-4">Connect</h3>
-          <div className="flex space-x-4">
-            <a
-              href="https://github.com/NouhaylaMouakkal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Github className="h-6 w-6" />
-              <span className="sr-only">GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/nouhayla-mouakkal/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Linkedin className="h-6 w-6" />
-              <span className="sr-only">LinkedIn</span>
-            </a>
-            <a
-              href="mailto:nouhaylamouakkal@gmail.com"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Mail className="h-6 w-6" />
-              <span className="sr-only">Email</span>
-            </a>
-            <a
-              href="https://www.instagram.com/nouhayla.mkl1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="h-6 w-6" />
-              <span className="sr-only">Instagram</span>
-            </a>
+          {/* Contact */}
+          <div className="md:col-span-3">
+            <h3 className="label mb-6">Get in Touch</h3>
+            <ul className="space-y-3 text-muted-foreground">
+              <li>
+                <a href="mailto:mouakkalnouhayla@gmail.com" className="hover:text-foreground transition-colors">
+                  mouakkalnouhayla@gmail.com
+                </a>
+              </li>
+              <li>Casablanca, Morocco</li>
+              <li>
+                <a href="tel:+212708016211" className="hover:text-foreground transition-colors">
+                  +212708016211
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div className="container mt-8 pt-4 border-t border-border text-center">
-        <p className="text-muted-foreground">&copy; {currentYear} Nouhayla Mouakkal. All rights reserved.</p>
+
+        {/* Bottom bar */}
+        <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            &copy; {year} Nouhayla Mouakkal. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   )
 }
-
-export default Footer

@@ -1,275 +1,285 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
 import {
   Github,
   Linkedin,
   Mail,
-  Instagram,
   MapPin,
   Phone,
-  Brain,
-  Zap,
-  Code,
-  Cpu,
-  MessageSquare,
   Send,
-  Sparkles,
+  ArrowUpRight,
+  CheckCircle2,
+  Loader2,
 } from "lucide-react"
 import emailjs from "@emailjs/browser"
-import { toast } from "@/components/ui/use-toast"
-import { Toaster } from "@/components/ui/toaster"
+import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/animated-section"
+
+const socials = [
+  {
+    icon: Github,
+    label: "GitHub",
+    handle: "@NouhaylaMouakkal",
+    href: "https://github.com/NouhaylaMouakkal",
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    handle: "in/nouhaylamouakkal",
+    href: "https://www.linkedin.com/in/nouhaylamouakkal/",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    handle: "mouakkalnouhayla@gmail.com",
+    href: "mailto:mouakkalnouhayla@gmail.com",
+  },
+]
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: "mouakkalnouhayla@gmail.com",
+    href: "mailto:mouakkalnouhayla@gmail.com",
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "+212708016211",
+    href: "tel:+212708016211",
+  },
+  {
+    icon: MapPin,
+    label: "Location",
+    value: "Casablanca, Morocco",
+    href: null,
+  },
+]
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     if (!formRef.current) return
 
     try {
       setIsSubmitting(true)
-
-      // Replace these with your actual EmailJS credentials
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
       if (!serviceId || !templateId || !publicKey) {
-        throw new Error("EmailJS environment variables are not properly configured.")
+        throw new Error("EmailJS not configured")
       }
+
       await emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
-
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for your message. I'll get back to you soon.",
-      })
-
+      setSubmitted(true)
       formRef.current.reset()
     } catch (error) {
-      console.error("Error sending email:", error)
-      toast({
-        title: "Failed to send message",
-        description: "Please try again later or contact me directly via email.",
-        variant: "destructive",
-      })
+      console.error("Error:", error)
+      alert("Failed to send message. Please try again or contact me directly via email.")
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <div className="relative min-h-screen bg-background">
-      <Toaster />
+    <div className="relative pt-24 pb-12">
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute bottom-[10%] left-[5%] w-[30%] h-[30%] rounded-full bg-primary/[0.02] blur-[120px]" />
+      </div>
 
-      <div className="relative z-20 container mx-auto px-4 py-16">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-2 mb-6 rounded-full bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 backdrop-blur-sm border border-white/10">
-            <Brain className="h-8 w-8 text-purple-400 mr-2" />
-            <Cpu className="h-8 w-8 text-fuchsia-400" />
-          </div>
-          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-            Let's Connect
+      <div className="container relative z-10">
+        {/* Header */}
+        <AnimatedSection className="mb-16">
+          <span className="label mb-4 block">Contact</span>
+          <h1 className="heading-lg mb-6">
+            Let's create
+            <br />
+            <span className="text-gradient">something together</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Ready to build the future with AI? Let's discuss how we can create intelligent solutions together.
+          <p className="body-lg max-w-xl">
+            Whether you have a project in mind, want to collaborate, or just want to say hello — I'd love to hear
+            from you.
           </p>
-          <div className="mt-6 flex justify-center">
-            <div className="flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-muted-foreground">Available for new opportunities</span>
-            </div>
-          </div>
-        </div>
+        </AnimatedSection>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="relative">
-              <Card className="bg-card/50 backdrop-blur-xl border-border/50">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-foreground flex items-center">
-                    <MessageSquare className="h-6 w-6 text-purple-400 mr-3" />
-                    Get in Touch
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground text-lg">
-                    Whether you're looking to build AI solutions, discuss machine learning projects, or explore
-                    cutting-edge technologies, I'm here to help bring your vision to life.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            </div>
-
-            {/* Contact Cards - Removed all hover effects */}
-            <div className="space-y-4">
-              {[
-                {
-                  icon: Mail,
-                  title: "Email",
-                  value: "mouakkalnouhayla@gmail.com",
-                  href: "mailto:mouakkalnouhayla@gmail.com",
-                  color: "from-purple-500 to-fuchsia-500",
-                },
-                {
-                  icon: MapPin,
-                  title: "Location",
-                  value: "Casablanca, Morocco",
-                  color: "from-purple-500 to-pink-500",
-                },
-                {
-                  icon: Phone,
-                  title: "Phone",
-                  value: "+212 618068186",
-                  href: "tel:+212618068186",
-                  color: "from-fuchsia-500 to-purple-500",
-                },
-              ].map((item, index) => (
-                <Card key={index} className="bg-card/80 backdrop-blur-xl border-border/50">
-                  <CardContent className="p-6 flex items-center">
-                    <div className={`p-3 rounded-full bg-gradient-to-r ${item.color} mr-4`}>
-                      <item.icon className="h-6 w-6 text-white" />
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left column */}
+          <div className="lg:col-span-2 space-y-8">
+            <AnimatedSection delay={0.1}>
+              <div className="space-y-6">
+                {contactInfo.map((item) => (
+                  <div key={item.label} className="flex items-start gap-4">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+                      <item.icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <CardTitle className="text-foreground text-base mb-1">{item.title}</CardTitle>
-                      <CardDescription className="text-muted-foreground">
-                        {item.href ? (
-                          <a href={item.href} className="text-muted-foreground">
-                            {item.value}
-                          </a>
-                        ) : (
-                          item.value
-                        )}
-                      </CardDescription>
+                      <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+                        {item.label}
+                      </p>
+                      {item.href ? (
+                        <a
+                          href={item.href}
+                          className="text-foreground font-medium hover:text-primary transition-colors"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="text-foreground font-medium">{item.value}</p>
+                      )}
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            {/* Social Links - Removed all hover effects */}
-            <div>
-              <h3 className="text-xl font-bold text-foreground mb-6 flex items-center">
-                <Sparkles className="h-5 w-5 text-yellow-400 mr-2" />
-                Connect & Collaborate
-              </h3>
-              <div className="flex space-x-4">
-                {[
-                  { icon: Github, href: "https://github.com/NouhaylaMouakkal", label: "GitHub" },
-                  { icon: Linkedin, href: "https://www.linkedin.com/in/nouhaylamouakkal/", label: "LinkedIn" },
-                  { icon: Mail, href: "mailto:mouakkalnouhayla@gmail.com", label: "Email" },
-                  { icon: Instagram, href: "https://www.instagram.com/nouhayla.mkl1", label: "Instagram" },
-                ].map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                    className="p-4 rounded-xl bg-card/50 backdrop-blur-xl border border-border/50"
-                  >
-                    <social.icon className="h-6 w-6 text-muted-foreground" />
-                    <span className="sr-only">{social.label}</span>
-                  </a>
+                  </div>
                 ))}
               </div>
-            </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.2}>
+              <div className="p-6 rounded-2xl glass">
+                <h3 className="font-display font-semibold text-foreground mb-4">Connect</h3>
+                <div className="space-y-3">
+                  {socials.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between p-3 rounded-xl hover:bg-white/[0.04] transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <social.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                        <div>
+                          <p className="text-sm font-medium text-foreground">{social.label}</p>
+                          <p className="text-xs text-muted-foreground">{social.handle}</p>
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.3}>
+              <div className="p-6 rounded-2xl glass border border-primary/10">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                  </div>
+                  <span className="text-sm font-medium text-foreground">Available for opportunities</span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Currently open to AI engineering roles, freelance projects, and research collaborations. Prefer
+                  remote or hybrid in Morocco/Europe time zones.
+                </p>
+              </div>
+            </AnimatedSection>
           </div>
 
-          {/* Contact Form */}
-          <div className="relative">
-            <Card className="bg-card/50 backdrop-blur-xl border-border/50">
-              <CardHeader>
-                <CardTitle className="text-2xl text-foreground flex items-center">
-                  <Code className="h-6 w-6 text-purple-400 mr-3" />
-                  Start a Conversation
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Ready to discuss your next AI project? Drop me a message and let's create something amazing together.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Right column — Form */}
+          <div className="lg:col-span-3">
+            <AnimatedSection delay={0.2}>
+              <div className="p-6 md:p-8 rounded-2xl glass">
+                {submitted ? (
+                  <div className="text-center py-12">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-6">
+                      <CheckCircle2 className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-display text-xl font-semibold text-foreground mb-2">Message sent!</h3>
+                    <p className="text-muted-foreground mb-6">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="text-sm text-primary font-medium hover:underline"
+                    >
+                      Send another message
+                    </button>
+                  </div>
+                ) : (
+                  <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid sm:grid-cols-2 gap-5">
+                      <div className="space-y-2">
+                        <label htmlFor="user_name" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                          Name
+                        </label>
+                        <input
+                          id="user_name"
+                          name="user_name"
+                          type="text"
+                          required
+                          placeholder="Your name"
+                          className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label htmlFor="user_email" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                          Email
+                        </label>
+                        <input
+                          id="user_email"
+                          name="user_email"
+                          type="email"
+                          required
+                          placeholder="you@example.com"
+                          className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all"
+                        />
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <label htmlFor="user_name" className="text-sm font-medium text-muted-foreground">
-                        Name
+                      <label htmlFor="subject" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Subject
                       </label>
-                      <Input
-                        id="user_name"
-                        name="user_name"
-                        placeholder="Your name"
+                      <input
+                        id="subject"
+                        name="subject"
+                        type="text"
                         required
-                        className="bg-background/50 border-border text-foreground placeholder:text-muted-foreground"
+                        placeholder="Project collaboration, job opportunity, etc."
+                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all"
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <label htmlFor="user_email" className="text-sm font-medium text-muted-foreground">
-                        Email
+                      <label htmlFor="message" className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                        Message
                       </label>
-                      <Input
-                        id="user_email"
-                        name="user_email"
-                        type="email"
-                        placeholder="your.email@example.com"
+                      <textarea
+                        id="message"
+                        name="message"
                         required
-                        className="bg-background/50 border-border text-foreground placeholder:text-muted-foreground"
+                        rows={5}
+                        placeholder="Tell me about your project, idea, or how we can work together..."
+                        className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/30 focus:ring-1 focus:ring-primary/20 transition-all resize-none"
                       />
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium text-muted-foreground">
-                      Subject
-                    </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder="Let's build an AI solution..."
-                      required
-                      className="bg-background/50 border-border text-foreground placeholder:text-muted-foreground"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-muted-foreground">
-                      Message
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Tell me about your project, ideas, or how we can collaborate..."
-                      rows={6}
-                      required
-                      className="bg-background/50 border-border text-foreground placeholder:text-muted-foreground resize-none"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 text-white font-medium py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Processing...
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center">
-                        <Send className="h-5 w-5 mr-2" />
-                        Send Message
-                      </div>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Send Message
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </div>

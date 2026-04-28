@@ -1,508 +1,586 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import ParticleBackground from "@/components/particle-background"
-import TypingEffect from "@/components/typing-effect"
-import LoadingScreen from "@/components/loading-screen"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { Github, ArrowRight, Brain, Database, Code, Sparkles, Zap, Target, Cpu, Network, Bot } from "lucide-react"
+import Image from "next/image"
 import { motion } from "framer-motion"
-import ScrollReveal from "@/components/scroll-reveal"
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Github,
+  Linkedin,
+  Mail,
+  Brain,
+  Database,
+  Code2,
+  Cloud,
+  Eye,
+  Sparkles,
+  Terminal,
+} from "lucide-react"
+import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/animated-section"
 
-// Add custom CSS for gradient animation
-const gradientStyle = `
-  @keyframes gradient-x {
-    0%, 100% {
-      background-size: 200% 200%;
-      background-position: left center;
-    }
-    50% {
-      background-size: 200% 200%;
-      background-position: right center;
-    }
-  }
-  .animate-gradient-x {
-    animation: gradient-x 4s ease infinite;
-  }
-`
+/* ─── Data ─── */
+const socials = [
+  { icon: Github, href: "https://github.com/NouhaylaMouakkal", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/nouhaylamouakkal/", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:mouakkalnouhayla@gmail.com", label: "Email" },
+]
 
-export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+const skillCategories = [
+  {
+    icon: Brain,
+    title: "AI / ML",
+    items: ["PyTorch", "TensorFlow", "Scikit-learn", "OpenCV", "YOLO"],
+  },
+  {
+    icon: Database,
+    title: "Data Engineering",
+    items: ["PySpark", "Hadoop", "ETL Pipelines", "Power BI", "Kafka"],
+  },
+  {
+    icon: Code2,
+    title: "Full Stack",
+    items: ["Angular", "Next.js", "Flask", "Node.js", "REST APIs"],
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    items: ["Azure", "Oracle Cloud", "Docker", "Kubernetes", "CI/CD"],
+  },
+  {
+    icon: Sparkles,
+    title: "GenAI & NLP",
+    items: ["LLMs", "RAG", "LangChain", "Prompt Engineering", "NLP"],
+  },
+  {
+    icon: Terminal,
+    title: "Languages",
+    items: ["Python", "TypeScript", "Java", "SQL", "C++"],
+  },
+]
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+const featuredProjects = [
+  {
+    id: "learnia",
+    title: "LearNia",
+    tagline: "AI-Powered SaaS Learning Management System",
+    description:
+      "An enterprise-grade LMS that leverages generative AI to create personalized learning experiences. Features multimodal content generation, adaptive AI tutoring, immersive VR classrooms, and predictive student analytics.",
+    problem:
+      "Educational institutions struggle with one-size-fits-all platforms that fail to adapt to individual learning patterns, leading to disengagement and poor outcomes.",
+    solution:
+      "Architected a full-stack AI-native LMS using Angular, Flask, and Firebase. Integrated LLMs for content generation, built adaptive tutoring algorithms, and deployed VR classroom modules for immersive learning.",
+    impact:
+      "Streamlined content creation by 70%, increased student engagement metrics, and provided educators with real-time predictive analytics to intervene before at-risk students fall behind.",
+    tags: ["GenAI", "Angular", "Flask", "Firebase", "VR", "LLMs"],
+    image: "/Projects/learnia.png",
+    link: "#",
+    featured: true,
+  },
+  {
+    id: "strategic-insight",
+    title: "Strategic Insight Pro",
+    tagline: "Executive Decision Intelligence",
+    description:
+      "Real-time analytics platform with AI-driven scenario planning and a strategic chatbot powered by NLP and RAG for enhanced CEO decision-making.",
+    problem: "Executives lack real-time, AI-augmented tools for strategic planning and data-driven decisions.",
+    solution: "Delivered an AI platform with natural language querying, scenario simulation, and automated insight generation.",
+    impact: "Empowered leadership with faster, more accurate strategic decisions through conversational AI.",
+    tags: ["NLP", "RAG", "Python", "Power BI", "LLMs"],
+    image: "/Projects/oklever.png",
+    link: "#",
+    featured: true,
+  },
+  {
+    id: "echosign",
+    title: "EchoSign",
+    tagline: "Moroccan Sign Language Translator",
+    description:
+      "Transforming Moroccan Sign Language into text and audio for seamless communication with the deaf community using computer vision and deep learning.",
+    problem: "Limited accessibility tools for Moroccan Sign Language speakers.",
+    solution: "Developed a real-time CV-based translation system using custom gesture recognition models.",
+    impact: "Bridged communication gaps and improved accessibility for the deaf community in Morocco.",
+    tags: ["Computer Vision", "TensorFlow", "Python", "Mobile"],
+    image: "/Projects/EchoSign.png",
+    link: "https://github.com/NouhaylaMouakkal/EchoSign.git",
+    featured: false,
+  },
+]
 
-  const skills = [
-    { icon: Brain, label: "Neural Networks", color: "from-purple-500 to-pink-500" },
-    { icon: Database, label: "Big Data", color: "from-blue-500 to-cyan-500" },
-    { icon: Code, label: "ML Engineering", color: "from-green-500 to-emerald-500" },
-    { icon: Cpu, label: "Deep Learning", color: "from-orange-500 to-red-500" },
-    { icon: Network, label: "Cloud Computing", color: "from-indigo-500 to-purple-500" },
-    { icon: Bot, label: "AI Consulting", color: "from-teal-500 to-blue-500" }
-  ]
+const experiences = [
+  {
+    role: "AI Consultant Intern",
+    company: "ITSS",
+    period: "2025 — Present",
+    location: "Casablanca",
+    description:
+      "Leading development of LearNia, an AI-powered SaaS LMS. Architecting multimodal content generation, AI tutoring systems, and analytics dashboards.",
+  },
+  {
+    role: "AI & Data Analyst Intern",
+    company: "Oklever",
+    period: "2024",
+    location: "Casablanca",
+    description:
+      "Built Strategic Insight Pro — an executive intelligence platform with real-time analytics, NLP-driven chatbot, and RAG-based scenario planning.",
+  },
+  {
+    role: "GenAI Intern",
+    company: "ProdigyInfo Tech",
+    period: "2024",
+    location: "Remote",
+    description:
+      "Developed a generative AI platform for image style transfer, text-to-image synthesis, and cross-platform creative tools.",
+  },
+]
 
-  const floatingElements = Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 60 + 20,
-    delay: Math.random() * 2,
-    duration: Math.random() * 3 + 4,
-  }))
-
+/* ─── Page ─── */
+export default function HomePage() {
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: gradientStyle }} />
-      {isLoading ? (
-        <LoadingScreen finishLoading={() => setIsLoading(false)} />
-      ) : (
-        <div className="relative min-h-screen overflow-hidden">
-          <ParticleBackground />
-          
-          {/* Floating geometric shapes */}
-          {floatingElements.map((element) => (
-            <motion.div
-              key={element.id}
-              className="absolute opacity-10 pointer-events-none"
-              style={{
-                width: element.size,
-                height: element.size,
-                background: `linear-gradient(45deg, rgba(139, 92, 246, 0.3), rgba(219, 39, 119, 0.3))`,
-                borderRadius: Math.random() > 0.5 ? '50%' : '20%',
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                rotate: [0, 180, 360],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: element.duration,
-                repeat: Infinity,
-                delay: element.delay,
-              }}
-            />
-          ))}
+    <div className="relative">
+      {/* Subtle ambient background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/[0.03] blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-500/[0.03] blur-[120px]" />
+      </div>
 
-          {/* Mouse follower gradient */}
-          <div
-            className="fixed pointer-events-none z-0 opacity-20"
-            style={{
-              background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.15), transparent 40%)`,
-              width: '100vw',
-              height: '100vh',
-              top: 0,
-              left: 0,
-            }}
-          />
-
-          {/* Hero Section */}
-          <section className="container pt-20 pb-16 md:pt-32 md:pb-24 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <motion.div 
-                className="space-y-8"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.2 }}
+      {/* ── HERO ── */}
+      <section className="relative min-h-[100dvh] flex items-center pt-20">
+        <div className="container relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left content */}
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-medium text-primary"
               >
-                {/* Glowing badge */}
-                <motion.div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 backdrop-blur-sm"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <Sparkles className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm font-medium text-purple-300">AI Engineer & Data Scientist</span>
-                </motion.div>
-
-                <div className="space-y-4">
-                  <motion.h1 
-                    className="text-5xl md:text-7xl font-bold leading-tight"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <span className="inline-block">Hi There!</span>{" "}
-                    <motion.span 
-                      className="inline-block text-6xl"
-                      animate={{ 
-                        rotateZ: [0, 20, -20, 0],
-                        scale: [1, 1.2, 1]
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        repeat: Infinity, 
-                        repeatDelay: 3 
-                      }}
-                    >
-                      👋
-                    </motion.span>
-                    <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 animate-gradient-x">
-                      I'm Nouhayla
-                      <br />
-                      MOUAKKAL
-                    </span>
-                  </motion.h1>
-
-                  <motion.div 
-                    className="text-xl md:text-3xl font-medium text-gray-300"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                  >
-                    <TypingEffect
-                      texts={[
-                        "AI Solutions Engineer", 
-                        "Machine Learning Entheusist",
-                        "Prompt Engineer",
-                        "Hooked on AI Automation"
-                      ]}
-                    />
-                  </motion.div>
-                </div>
-
-                <motion.div 
-                  className="flex flex-wrap gap-4 pt-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 }}
-                >
-                  <Button 
-                    asChild 
-                    size="lg" 
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                  >
-                    <Link href="https://github.com/NouhaylaMouakkal">
-                      <Github className="mr-2 h-5 w-5" />
-                      Explore Code
-                    </Link>
-                  </Button>
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    size="lg"
-                    className="border-purple-500/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 transform hover:scale-105 transition-all duration-300"
-                  >
-                    <Link href="/projects">
-                      <Zap className="mr-2 h-5 w-5" />
-                      View AI Projects
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                </motion.div>
-
-                {/* AI Skills Pills */}
-                <motion.div 
-                  className="flex flex-wrap gap-3 pt-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.2 }}
-                >
-                  {skills.slice(0, 3).map((skill, index) => (
-                    <motion.div
-                      key={skill.label}
-                      className={`px-4 py-2 rounded-full bg-gradient-to-r ${skill.color} bg-opacity-20 border border-white/20 backdrop-blur-sm`}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 1.4 + index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <div className="flex items-center gap-2 text-sm font-medium">
-                        <skill.icon className="w-4 h-4" />
-                        {skill.label}
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                </span>
+                Available for opportunities
               </motion.div>
 
-              {/* Enhanced Avatar Section */}
-              <motion.div 
-                className="relative flex justify-center lg:justify-end"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.4 }}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="heading-xl"
               >
-                <div className="relative">
-                  {/* Glowing background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full blur-3xl"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      opacity: [0.3, 0.5, 0.3],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                    }}
-                  />
-                  
-                  {/* Main avatar */}
-                  <motion.div
-                    className="relative z-10"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <img
-                      src="myavatar.png"
-                      alt="Nouhayla Mouakkal - AI Engineer"
-                      className="w-80 h-80 md:w-96 md:h-96 object-cover rounded-full border-4 border-gradient-to-r from-purple-400 to-pink-400 shadow-2xl"
-                    />
-                  </motion.div>
+                <span className="text-foreground">Nouhayla</span>
+                <br />
+                <span className="text-gradient">Mouakkal</span>
+              </motion.h1>
 
-                  {/* Floating tech icons */}
-                  {skills.map((skill, index) => (
-                    <motion.div
-                      key={skill.label}
-                      className="absolute bg-gray-900/80 backdrop-blur-sm p-3 rounded-xl shadow-lg border border-white/10"
-                      style={{
-                        top: `${20 + (index * 15)}%`,
-                        right: index % 2 === 0 ? '-10%' : 'auto',
-                        left: index % 2 !== 0 ? '-10%' : 'auto',
-                      }}
-                      animate={{
-                        y: [0, -10, 0],
-                        rotate: [0, 5, -5, 0],
-                      }}
-                      transition={{
-                        duration: 3 + index * 0.5,
-                        repeat: Infinity,
-                        delay: index * 0.5,
-                      }}
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <skill.icon className={`w-6 h-6 bg-gradient-to-r ${skill.color} bg-clip-text text-transparent`} />
-                    </motion.div>
-                  ))}
-                </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+                className="space-y-4"
+              >
+                <p className="text-xl md:text-2xl font-display font-medium text-foreground/90">
+                  AI Engineer & Software Consultant Engineer
+                </p>
+                <p className="body-lg max-w-lg">
+                  I design and build intelligent systems at the intersection of machine learning, user experience, and
+                  scalable engineering. Specializing in LLMs, NLP, full-stack AI product development, and AI workforce
+                  solutions.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="flex flex-wrap items-center gap-4"
+              >
+                <Link
+                  href="/projects"
+                  className="group inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
+                >
+                  View Projects
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full font-medium text-foreground hover:bg-white/[0.06] transition-colors"
+                >
+                  Get in Touch
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="flex items-center gap-4 pt-4"
+              >
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                    rel={s.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    className="p-2.5 rounded-full glass text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
+                    aria-label={s.label}
+                  >
+                    <s.icon className="w-4 h-4" />
+                  </a>
+                ))}
               </motion.div>
             </div>
 
-            {/* Scroll indicator */}
-            <motion.div 
-              className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2 }}
+            {/* Right visual */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative hidden lg:block"
             >
-              <Link href="#about" className="flex flex-col items-center group">
-                <span className="text-sm font-medium mb-2 text-purple-300 group-hover:text-purple-200 transition-colors">
-                  Discover More
-                </span>
+              <div className="relative aspect-square max-w-md mx-auto">
+                {/* Glow */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-cyan-500/20 rounded-3xl blur-2xl" />
+                {/* Image container */}
+                <div className="relative h-full rounded-3xl overflow-hidden border border-white/[0.08] bg-white/[0.02]">
+                  <Image
+                    src="/myavatar.png"
+                    alt="Nouhayla Mouakkal"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                {/* Floating stats */}
                 <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="p-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-4 -right-4 glass px-4 py-3 rounded-2xl"
                 >
-                  <ArrowRight className="h-5 w-5 transform rotate-90 text-purple-400" />
+                  <div className="text-2xl font-bold text-foreground">5+</div>
+                  <div className="text-xs text-muted-foreground">AI Projects</div>
                 </motion.div>
-              </Link>
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-4 -left-4 glass px-4 py-3 rounded-2xl"
+                >
+                  <div className="text-2xl font-bold text-foreground">3+</div>
+                  <div className="text-xs text-muted-foreground">Years Experience</div>
+                </motion.div>
+              </div>
             </motion.div>
-  </section>
+          </div>
+        </div>
 
-  {/* Enhanced About Section */}
-  <section
-    id="about"
-    className="py-24 bg-gradient-to-b from-gray-900/50 to-gray-800/50 backdrop-blur-sm relative"
-  >
-    <div className="container relative z-10">
-      <ScrollReveal>
-        <motion.h2 
-          className="text-4xl md:text-6xl font-bold mb-16 text-center"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-            About Me
-          </span>
-        </motion.h2>
-      </ScrollReveal>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2"
+          >
+            <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
+          </motion.div>
+        </motion.div>
+      </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <ScrollReveal direction="right">
-          <div className="relative">
-            <div className="absolute -z-10 -top-6 -left-6 w-full h-full rounded-2xl bg-gradient-to-br from-purple-600/20 to-fuchsia-500/20 transform rotate-3" />
-            <img
-              src="/aboutme.png"
-              alt="About Nouhayla"
-              className="rounded-xl shadow-xl w-full object-cover z-10"
-            />
-
-            {/* Floating badges */}
-            <motion.div
-              className="absolute -top-8 -right-8 bg-card p-4 rounded-full shadow-lg flex items-center justify-center"
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
-              }}
-            >
-              <Brain className="h-8 w-8 text-primary" />
-            </motion.div>
-
-            <motion.div
-              className="absolute -bottom-8 -left-8 bg-card p-4 rounded-full shadow-lg flex items-center justify-center"
-              animate={{
-                y: [0, 10, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
-                delay: 1,
-              }}
-            >
-              <Database className="h-8 w-8 text-secondary" />
-            </motion.div>
-
-            <motion.div
-              className="absolute top-1/2 -right-8 bg-card p-4 rounded-full shadow-lg flex items-center justify-center"
-              animate={{
-                y: [0, 15, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
-                delay: 2,
-              }}
-            >
-              <Code className="h-8 w-8 text-primary" />
-            </motion.div>
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal direction="left">
-          <div className="space-y-8">
-            <motion.h3 
-              className="text-4xl md:text-5xl font-bold"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
-                Passionate AI Engineer
-              </span>
-              <br />
-              <span className="text-gray-300">& Data Scientist</span>
-            </motion.h3>
-            
-            <motion.div 
-              className="space-y-6 text-lg text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <p>
-                Welcome to my digital realm! I'm <strong className="text-purple-400">Nouhayla Mouakkal</strong>, 
-                a third-year Big Data & Cloud Computing engineering student with an insatiable curiosity for 
-                artificial intelligence and data science.
-              </p>
-              <p>
-                I specialize in transforming complex datasets into actionable insights through{" "}
-                <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                  machine learning, neural networks, and statistical modeling
-                </span>
-                . My passion lies in building AI solutions that push the boundaries of what's possible.
-              </p>
-              <p>
-                From developing sophisticated ML pipelines to architecting cloud-native AI systems, 
-                I'm dedicated to creating technology that makes a meaningful impact.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="pt-6 flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Button 
-                asChild 
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300"
-              >
-                <Link href="/about">
-                  Learn More About Me
-                  <ArrowRight className="ml-2 h-5 w-5" />
+      {/* ── ABOUT PREVIEW ── */}
+      <section className="section relative">
+        <div className="container">
+          <AnimatedSection>
+            <span className="label mb-4 block">About Me</span>
+          </AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <AnimatedSection delay={0.1}>
+              <h2 className="heading-md mb-6">
+                Engineering intelligence
+                <br />
+                <span className="text-gradient">with purpose</span>
+              </h2>
+            </AnimatedSection>
+            <div className="space-y-6">
+              <AnimatedSection delay={0.2}>
+                <p className="body-lg">
+                  I'm Nouhayla Mouakkal, AI Engineer & Consultant at Nia-Gen by ITSS and Big Data & Cloud Computing
+                  alumna of ENSET Mohammedia. I don't just build models — I architect end-to-end intelligent systems
+                  that solve real problems.
+                </p>
+              </AnimatedSection>
+              <AnimatedSection delay={0.3}>
+                <p className="body-lg">
+                  From designing RAG-powered chatbots for executive decision-making to building multimodal LMS platforms
+                  with AI tutoring, my work sits at the intersection of research-grade ML and production-grade software.
+                  Fueled by code, a RedBull habit, and the chase for the next big tech thrill.
+                </p>
+              </AnimatedSection>
+              <AnimatedSection delay={0.4}>
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all"
+                >
+                  Read full story
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              </Button>
-              <Button 
-                asChild 
-                variant="outline"
-                className="border-purple-500/50 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 transform hover:scale-105 transition-all duration-300"
-              >
-                <Link href="/contact">Get In Touch</Link>
-              </Button>
-            </motion.div>
+              </AnimatedSection>
+            </div>
           </div>
-        </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── SKILLS PREVIEW ── */}
+      <section className="section-sm relative border-y border-white/[0.04] bg-white/[0.01]">
+        <div className="container">
+          <AnimatedSection className="text-center mb-12">
+            <span className="label mb-4 block">Tech Stack</span>
+            <h2 className="heading-sm">
+              Tools I use to <span className="text-gradient">build intelligence</span>
+            </h2>
+          </AnimatedSection>
+
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.08}>
+            {skillCategories.map((cat) => (
+              <StaggerItem key={cat.title}>
+                <div className="group p-6 rounded-2xl glass card-hover">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                      <cat.icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-display font-semibold text-foreground">{cat.title}</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {cat.items.map((item) => (
+                      <span
+                        key={item}
+                        className="px-2.5 py-1 text-xs font-medium rounded-md bg-white/[0.04] text-muted-foreground border border-white/[0.06]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          <AnimatedSection delay={0.4} className="text-center mt-10">
+            <Link
+              href="/skills"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View all skills
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── FEATURED PROJECTS ── */}
+      <section className="section relative">
+        <div className="container">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+            <div>
+              <AnimatedSection>
+                <span className="label mb-4 block">Selected Work</span>
+              </AnimatedSection>
+              <AnimatedSection delay={0.1}>
+                <h2 className="heading-md">
+                  Projects that <span className="text-gradient">define my craft</span>
+                </h2>
+              </AnimatedSection>
+            </div>
+            <AnimatedSection delay={0.2}>
+              <Link
+                href="/projects"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+              >
+                View all projects
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </AnimatedSection>
+          </div>
+
+          <div className="space-y-8">
+            {featuredProjects.map((project, idx) => (
+              <AnimatedSection key={project.id} delay={idx * 0.15}>
+                <ProjectCard project={project} reversed={idx % 2 !== 0} />
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── EXPERIENCE PREVIEW ── */}
+      <section className="section-sm relative border-y border-white/[0.04] bg-white/[0.01]">
+        <div className="container">
+          <AnimatedSection className="text-center mb-12">
+            <span className="label mb-4 block">Experience</span>
+            <h2 className="heading-sm">
+              Where I've <span className="text-gradient">made impact</span>
+            </h2>
+          </AnimatedSection>
+
+          <StaggerContainer className="max-w-3xl mx-auto" staggerDelay={0.12}>
+            {experiences.map((exp) => (
+              <StaggerItem key={exp.role}>
+                <div className="group relative pl-8 pb-10 last:pb-0 border-l border-white/[0.08]">
+                  <div className="absolute left-0 top-0 -translate-x-1/2 w-3 h-3 rounded-full bg-primary/30 border-2 border-background group-hover:bg-primary transition-colors" />
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                    <div>
+                      <h3 className="font-display font-semibold text-foreground">{exp.role}</h3>
+                      <p className="text-sm text-muted-foreground">{exp.company}</p>
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground bg-white/[0.04] px-2.5 py-1 rounded-full self-start">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{exp.description}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="section relative">
+        <div className="container">
+          <AnimatedSection className="relative overflow-hidden rounded-3xl glass-strong p-12 md:p-20 text-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-cyan-500/5" />
+            <div className="relative z-10 max-w-2xl mx-auto space-y-6">
+              <h2 className="heading-md">
+                Let's build something
+                <br />
+                <span className="text-gradient">extraordinary</span>
+              </h2>
+              <p className="body-lg">
+                I'm always open to discussing AI products, engineering challenges, or opportunities to create
+                meaningful impact.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
+                >
+                  Start a conversation
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a
+                  href="/CV_Nouhayla_MOUAKKAL.pdf"
+                  target="_blank"
+                  className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full font-medium text-foreground hover:bg-white/[0.06] transition-colors"
+                >
+                  Download CV
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+/* ─── Sub-components ─── */
+
+function ProjectCard({
+  project,
+  reversed,
+}: {
+  project: (typeof featuredProjects)[0]
+  reversed: boolean
+}) {
+  return (
+    <div
+      className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
+        reversed ? "lg:direction-rtl" : ""
+      }`}
+    >
+      {/* Image */}
+      <div className={`relative group ${reversed ? "lg:order-2" : ""}`}>
+        <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/[0.08] bg-white/[0.02]">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className={`space-y-5 ${reversed ? "lg:order-1 lg:text-right" : ""}`}>
+        <div className={`flex flex-wrap gap-2 ${reversed ? "lg:justify-end" : ""}`}>
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/10"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div>
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-1">{project.title}</h3>
+          <p className="text-sm text-primary font-medium">{project.tagline}</p>
+        </div>
+
+        <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+
+        <div className="space-y-3">
+          <div className="flex gap-3">
+            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+            <div>
+              <span className="text-xs font-medium text-foreground uppercase tracking-wider">Problem</span>
+              <p className="text-sm text-muted-foreground">{project.problem}</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+            <div>
+              <span className="text-xs font-medium text-foreground uppercase tracking-wider">Solution</span>
+              <p className="text-sm text-muted-foreground">{project.solution}</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+            <div>
+              <span className="text-xs font-medium text-foreground uppercase tracking-wider">Impact</span>
+              <p className="text-sm text-muted-foreground">{project.impact}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className={`flex items-center gap-4 pt-2 ${reversed ? "lg:justify-end" : ""}`}>
+          {project.link !== "#" && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+            >
+              <Github className="w-4 h-4" />
+              View Code
+            </a>
+          )}
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Eye className="w-4 h-4" />
+            Case Study
+          </a>
+        </div>
       </div>
     </div>
-  </section>
-
-{/* Enhanced CTA Section */}
-        <motion.section 
-          className="py-24 relative overflow-hidden"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-sm" />
-          <div className="container text-center relative z-10">
-            <motion.h2 
-              className="text-4xl md:text-6xl font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                Let's Build the Future
-              </span>
-              <br />
-              <span className="text-white">Together</span>
-            </motion.h2>
-            <motion.p 
-              className="text-xl max-w-3xl mx-auto mb-10 text-gray-300 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Ready to revolutionize your business with cutting-edge AI solutions? 
-              Let's collaborate and turn your vision into intelligent reality.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform hover:scale-110 transition-all duration-300 shadow-xl hover:shadow-2xl text-lg px-8 py-4"
-              >
-                <Link href="/contact">
-                  <Target className="mr-2 h-6 w-6" />
-                  Start Our Journey
-                  <ArrowRight className="ml-2 h-6 w-6" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </motion.section>
-      </div>
-    )}
-    </>
   )
 }

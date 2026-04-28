@@ -2,108 +2,135 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ModeToggle } from "./mode-toggle"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { usePathname } from "next/navigation"
+import { Menu, X } from "lucide-react"
+import { ModeToggle } from "./mode-toggle"
 
-const Navbar = () => {
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/skills", label: "Skills" },
+  { href: "/projects", label: "Projects" },
+  { href: "/writings", label: "Writings" },
+  { href: "/contact", label: "Contact" },
+]
+
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
-
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/skills", label: "Skills" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
-    { href: "/writings", lable : "Writings"}
-  ]
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <motion.span
-            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-500 bg-clip-text text-transparent"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            NM
-          </motion.span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`relative text-foreground/80 hover:text-primary transition-colors ${
-                pathname === link.href ? "text-primary font-medium" : ""
-              }`}
+    <>
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-background/70 backdrop-blur-2xl border-b border-white/[0.06]"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container flex h-16 md:h-20 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="relative z-10">
+            <motion.span
+              className="font-display text-xl md:text-2xl font-bold tracking-tight"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {link.label}
-              {pathname === link.href && (
-                <motion.span
-                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary"
-                  layoutId="navbar-underline"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </Link>
-          ))}
-          <ModeToggle />
-        </nav>
+              <span className="text-foreground">Nouhayla</span>
+              <span className="text-primary">.</span>
+            </motion.span>
+          </Link>
 
-        {/* Mobile Navigation */}
-        <div className="flex items-center gap-4 md:hidden">
-          <ModeToggle />
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <nav className="flex flex-col gap-4 mt-8">
-                {navLinks.map((link) => (
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors rounded-full ${
+                    isActive
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-white/[0.06] rounded-full"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
+                </Link>
+              )
+            })}
+            <ModeToggle />
+          </nav>
+
+          {/* Mobile Toggle */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ModeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="relative z-10 p-2 text-foreground"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-2xl md:hidden"
+          >
+            <nav className="flex flex-col items-center justify-center h-full gap-6">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ delay: i * 0.05 }}
+                >
                   <Link
-                    key={link.href}
                     href={link.href}
-                    className={`text-foreground/80 hover:text-primary transition-colors py-2 ${
-                      pathname === link.href ? "text-primary font-medium" : ""
+                    className={`text-2xl font-display font-semibold ${
+                      pathname === link.href ? "text-primary" : "text-foreground"
                     }`}
                   >
                     {link.label}
                   </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-    </motion.header>
+                </motion.div>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
-
-export default Navbar
