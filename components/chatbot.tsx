@@ -1,23 +1,29 @@
-// components/Chatbot.tsx
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { MessageCircle, X, Send, Minimize2, Maximize2 } from "lucide-react";
-import { cn } from "@/lib/utils"; // Assuming this utility function exists
-
-// Import React Markdown and GFM plugin
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { MessageCircle, X, Send, Bot, Minimize2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Message = {
   id: string;
   text: string;
   sender: "user" | "bot";
-  timestamp: Date;
 };
+
+const TypingDots = () => (
+  <div className="flex items-center gap-1 px-1 py-0.5">
+    {[0, 1, 2].map((i) => (
+      <span
+        key={i}
+        className="w-1.5 h-1.5 rounded-full bg-primary/70 animate-pulse-soft"
+        style={{ animationDelay: `${i * 0.2}s` }}
+      />
+    ))}
+  </div>
+);
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,174 +31,225 @@ const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hi there! I'm Nouhayla's virtual assistant. How can I help you today?",
+      text: "Hi! I'm Nouhayla's AI assistant. Ask me anything about her skills, experience, or availability.",
       sender: "bot",
-      timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to the latest message whenever messages array updates
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const handleSendMessage = async () => {
-    if (!input.trim()) return; // Prevent sending empty messages
+    const text = input.trim();
+    if (!text || isLoading) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: input,
-      sender: "user",
-      timestamp: new Date(),
-    };
-    // Add user's message to the chat
-    setMessages((prev) => [...prev, userMessage]);
-    setInput(""); // Clear the input field
+    setMessages((prev) => [...prev, { id: Date.now().toString(), text, sender: "user" }]);
+    setInput("");
+    setIsLoading(true);
 
     try {
-      // Send the message to your Next.js API route
       const response = await fetch("/api/bot", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: userMessage.text }), // Send the user's message content
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
       });
 
-      // Check if the API response was successful
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-      }
-
       const data = await response.json();
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(), // Unique ID for bot message
-        text: data.response, // The generated response from Gemini
-        sender: "bot",
-        timestamp: new Date(),
-      };
-      // Add bot's response to the chat
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      console.error("Error fetching chatbot response:", error);
-      // Display an error message to the user
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: "Oops! I couldn't get a response right now. Please try again later.",
-        sender: "bot",
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      if (!response.ok) throw new Error(data.error);
+
+      setMessages((prev) => [
+        ...prev,
+        { id: (Date.now() + 1).toString(), text: data.response, sender: "bot" },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          text: "Sorry, I couldn't get a response right now. Please try again.",
+          sender: "bot",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
-      {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 rounded-full h-14 w-14 shadow-lg"
-        >
-          <MessageCircle className="h-6 w-6" />
-          <span className="sr-only">Open chat</span>
-        </Button>
-      )}
+      {/* FAB */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsOpen(true)}
+            className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-primary shadow-lg glow-primary flex items-center justify-center"
+          >
+            <MessageCircle className="h-6 w-6 text-white" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-      {isOpen && (
-        <Card
-          className={cn(
-            "fixed right-6 shadow-lg transition-all duration-300 z-50",
-            isMinimized ? "bottom-6 h-14 w-64" : "bottom-6 h-[500px] w-[350px] sm:w-[400px]",
-          )}
-        >
-          <CardHeader className="p-4 border-b flex flex-row items-center justify-between">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <MessageCircle className="h-5 w-5 text-primary" />
-              {isMinimized ? "Chat" : "Nouhayla's Assistant"}
-            </CardTitle>
-            <div className="flex items-center gap-1">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-                onClick={() => setIsMinimized(!isMinimized)}
-              >
-                {isMinimized ? <Maximize2 className="h-4 w-4" /> : <Minimize2 className="h-4 w-4" />}
-                <span className="sr-only">{isMinimized ? "Expand" : "Minimize"}</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-8 w-8"
-                onClick={() => setIsOpen(false)}
-              >
-                <X className="h-4 w-4" />
-                <span className="sr-only">Close</span>
-              </Button>
+      {/* Chat window */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              height: isMinimized ? "56px" : "520px",
+            }}
+            exit={{ opacity: 0, y: 24, scale: 0.96 }}
+            transition={{ type: "spring", stiffness: 340, damping: 30 }}
+            className={cn(
+              "fixed bottom-6 right-6 z-50 w-[360px] sm:w-[400px] rounded-2xl overflow-hidden",
+              "border border-white/[0.08] shadow-2xl",
+              "bg-[hsl(222,47%,5%)]"
+            )}
+          >
+            {/* Header */}
+            <div className="relative flex items-center justify-between px-4 py-3 bg-gradient-to-r from-primary/20 to-cyan-500/10 border-b border-white/[0.07]">
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
+                  <Bot className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white leading-none">Nouhayla's Assistant</p>
+                  <p className="text-[10px] text-primary/80 mt-0.5 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                    Online
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setIsMinimized((v) => !v)}
+                  className="h-7 w-7 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <Minimize2 className="h-3.5 w-3.5" />
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="h-7 w-7 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
             </div>
-          </CardHeader>
 
-          {!isMinimized && (
-            <>
-              <CardContent className="p-4 overflow-y-auto h-[calc(100%-120px)]">
-                <div className="space-y-4">
-                  {messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={cn("flex", message.sender === "user" ? "justify-end" : "justify-start")}
+            {/* Messages */}
+            {!isMinimized && (
+              <>
+                <div className="h-[380px] overflow-y-auto px-4 py-4 space-y-3 scrollbar-thin">
+                  {messages.map((msg) => (
+                    <motion.div
+                      key={msg.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={cn(
+                        "flex gap-2",
+                        msg.sender === "user" ? "justify-end" : "justify-start"
+                      )}
                     >
+                      {msg.sender === "bot" && (
+                        <div className="h-7 w-7 shrink-0 rounded-full bg-primary/15 border border-primary/25 flex items-center justify-center mt-0.5">
+                          <Bot className="h-3.5 w-3.5 text-primary" />
+                        </div>
+                      )}
                       <div
                         className={cn(
-                          "max-w-[80%] rounded-lg p-3",
-                          message.sender === "user" ? "bg-primary text-primary-foreground" : "bg-muted",
+                          "max-w-[78%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
+                          msg.sender === "user"
+                            ? "bg-primary text-white rounded-br-sm"
+                            : "bg-white/[0.06] border border-white/[0.08] text-slate-200 rounded-bl-sm"
                         )}
                       >
-                        {/* Use ReactMarkdown to render the message text */}
-                        <ReactMarkdown 
+                        <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            p: ({ children }) => <p className="text-sm">{children}</p>,
-                            span: ({ children }) => <span className="text-sm">{children}</span>,
+                            p: ({ children }) => <p className="text-[13px] leading-relaxed">{children}</p>,
+                            strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
+                            a: ({ href, children }) => (
+                              <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">
+                                {children}
+                              </a>
+                            ),
+                            ul: ({ children }) => <ul className="mt-1 space-y-0.5 list-disc list-inside">{children}</ul>,
+                            li: ({ children }) => <li className="text-[13px]">{children}</li>,
                           }}
                         >
-                          {message.text}
+                          {msg.text}
                         </ReactMarkdown>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
+
+                  {isLoading && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex gap-2 justify-start"
+                    >
+                      <div className="h-7 w-7 shrink-0 rounded-full bg-primary/15 border border-primary/25 flex items-center justify-center">
+                        <Bot className="h-3.5 w-3.5 text-primary" />
+                      </div>
+                      <div className="bg-white/[0.06] border border-white/[0.08] rounded-2xl rounded-bl-sm px-3.5 py-2.5">
+                        <TypingDots />
+                      </div>
+                    </motion.div>
+                  )}
+
                   <div ref={messagesEndRef} />
                 </div>
-              </CardContent>
 
-              <CardFooter className="p-4 border-t">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSendMessage();
-                  }}
-                  className="flex w-full gap-2"
-                >
-                  <Input
-                    placeholder="Type your message..."
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    className="flex-1"
-                  />
-                  <Button type="submit" size="icon">
-                    <Send className="h-4 w-4" />
-                    <span className="sr-only">Send</span>
-                  </Button>
-                </form>
-              </CardFooter>
-            </>
-          )}
-        </Card>
-      )}
+                {/* Input */}
+                <div className="px-4 py-3 border-t border-white/[0.07] bg-white/[0.02]">
+                  <form
+                    onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }}
+                    className="flex items-center gap-2"
+                  >
+                    <input
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Ask about Nouhayla..."
+                      disabled={isLoading}
+                      className={cn(
+                        "flex-1 bg-white/[0.06] border border-white/[0.1] rounded-xl px-3.5 py-2",
+                        "text-sm text-white placeholder:text-white/30 outline-none",
+                        "focus:border-primary/50 focus:bg-white/[0.08] transition-colors",
+                        "disabled:opacity-50"
+                      )}
+                    />
+                    <button
+                      type="submit"
+                      disabled={isLoading || !input.trim()}
+                      className={cn(
+                        "h-9 w-9 rounded-xl flex items-center justify-center shrink-0 transition-all",
+                        "bg-primary text-white hover:bg-primary/90",
+                        "disabled:opacity-40 disabled:cursor-not-allowed"
+                      )}
+                    >
+                      <Send className="h-4 w-4" />
+                    </button>
+                  </form>
+                </div>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
