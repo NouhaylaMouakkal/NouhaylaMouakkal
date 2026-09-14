@@ -13,6 +13,8 @@ type Message = {
   sender: "user" | "bot";
 };
 
+const MAX_MESSAGE_LENGTH = 1000;
+
 const TypingDots = () => (
   <div className="flex items-center gap-1 px-1 py-0.5">
     {[0, 1, 2].map((i) => (
@@ -46,7 +48,7 @@ const Chatbot = () => {
   }, [messages, isLoading]);
 
   const handleSendMessage = async () => {
-    const text = input.trim();
+    const text = input.trim().slice(0, MAX_MESSAGE_LENGTH);
     if (!text || isLoading) return;
 
     setMessages((prev) => [...prev, { id: Date.now().toString(), text, sender: "user" }]);
@@ -63,9 +65,10 @@ const Chatbot = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
 
+      const botText = typeof data.response === "string" ? data.response : "";
       setMessages((prev) => [
         ...prev,
-        { id: (Date.now() + 1).toString(), text: data.response, sender: "bot" },
+        { id: (Date.now() + 1).toString(), text: botText, sender: "bot" },
       ]);
     } catch {
       setMessages((prev) => [
@@ -181,11 +184,14 @@ const Chatbot = () => {
                           components={{
                             p: ({ children }) => <p className="text-[13px] leading-relaxed">{children}</p>,
                             strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
-                            a: ({ href, children }) => (
-                              <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">
-                                {children}
-                              </a>
-                            ),
+                            a: ({ href, children }) => {
+                              const safeHref = href && /^https?:\/\//i.test(href) ? href : undefined;
+                              return (
+                                <a href={safeHref} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2">
+                                  {children}
+                                </a>
+                              );
+                            },
                             ul: ({ children }) => <ul className="mt-1 space-y-0.5 list-disc list-inside">{children}</ul>,
                             li: ({ children }) => <li className="text-[13px]">{children}</li>,
                           }}
@@ -225,6 +231,7 @@ const Chatbot = () => {
                       onChange={(e) => setInput(e.target.value)}
                       placeholder="Ask about Nouhayla..."
                       disabled={isLoading}
+                      maxLength={MAX_MESSAGE_LENGTH}
                       className={cn(
                         "flex-1 bg-white/[0.06] border border-white/[0.1] rounded-xl px-3.5 py-2",
                         "text-sm text-white placeholder:text-white/30 outline-none",
