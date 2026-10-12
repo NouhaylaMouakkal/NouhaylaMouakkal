@@ -1,0 +1,7 @@
+# Send the default netlify.app address to the custom domain, so search engines
+# only ever see https://mouakkal.me as the canonical site.
+[[redirects]]
+  from = "https://mouakkal.netlify.app/*"
+  to = "https://mouakkal.me/:splat"
+  status = 301
+  force = true

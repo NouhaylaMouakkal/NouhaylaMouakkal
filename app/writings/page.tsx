@@ -158,6 +158,7 @@ export default function WritingsPage() {
                     src={article.image}
                     alt={article.title}
                     fill
+                    unoptimized
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
