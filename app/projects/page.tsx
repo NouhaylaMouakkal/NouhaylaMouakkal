@@ -17,10 +17,13 @@ import {
   Car,
   GraduationCap,
   Lightbulb,
+  MessageSquareText,
+  LayoutTemplate,
+  Presentation,
 } from "lucide-react"
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/animated-section"
 
-type ProjectCategory = "all" | "ai" | "data" | "web" | "cv"
+type ProjectCategory = "all" | "ai" | "agents" | "data" | "web" | "cv"
 
 interface Project {
   id: string
@@ -40,6 +43,60 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+    id: "ppt-agent",
+    title: "Presentation Generation Agent",
+    tagline: "From a Conversation to a Designed, Quality-Checked Deck",
+    description:
+      "A multi-agent system that turns a short description, a JSON document or a spreadsheet into a finished PowerPoint on a chosen template. The agent asks only for what's missing, builds editable slides, then inspects its own output before handing the file back.",
+    problem:
+      "Producing consistent, on-brand decks is slow manual work, and one-shot LLM generation tends to invent facts, overflow text boxes and ignore the template's design.",
+    solution:
+      "Orchestrated a pipeline of specialized agents: a router that detects the presentation type, a planner that decides what to ask and how to structure the story, a content mapper, a copy editor that rewrites text to fit measured space, and a vision-based design reviewer. Deterministic guards remove invented figures and dates, a layout linter measures text with real font metrics, and slides are rendered and scored. The behavior of each presentation type lives in an editable skill (rules, templates, instructions) rather than in code.",
+    impact:
+      "Delivers editable native slides with a design-quality score and a list of missing information. Hybrid design (rules first, LLM for the rest) keeps outputs trustworthy, and new presentation types are added from a settings screen with no code changes.",
+    tags: ["Multi-Agent", "LLM Orchestration", "Vision Review", "FastAPI", "OpenRouter", "Docker"],
+    category: ["ai", "agents"],
+    image: "/Projects/ppt-agent.svg",
+    icon: Presentation,
+    featured: true,
+  },
+  {
+    id: "flowbite-agent",
+    title: "Flowbite Agent",
+    tagline: "A Conversational UI Design Agent Grounded in Documentation",
+    description:
+      "A chat-based agent that builds UI components from the Flowbite documentation. Ask for a component and get a live preview next to copy-ready code, then keep refining colors, layout and variants in plain language until the design is right.",
+    problem:
+      "Developers lose time hopping between documentation pages and trial-and-error edits, while generic LLMs hallucinate class names and APIs that don't exist in the library.",
+    solution:
+      "Designed a tool-calling agent loop (FastAPI, bounded iterations) with three tools: semantic search over a ChromaDB index of the scraped docs (sentence-transformer embeddings), live page scraping, and a widget builder. The builder validates and sanitizes generated HTML and normalizes design props before the Next.js frontend renders it as a live preview + code card. Progress is streamed to the UI over SSE, and the same tools are also exposed through an MCP server. Everything ships as a four-service Docker Compose stack.",
+    impact:
+      "Answers are grounded in cited documentation instead of model memory, and generated components are safe to render and ready to paste. Exposing the tools via MCP makes them reusable from any MCP-compatible client.",
+    tags: ["Agentic AI", "RAG", "MCP", "Tool Calling", "FastAPI", "ChromaDB", "Next.js"],
+    category: ["ai", "agents", "web"],
+    image: "/Projects/flowbiteagent.svg",
+    icon: LayoutTemplate,
+    featured: true,
+  },
+  {
+    id: "textpilot",
+    title: "TextPilot",
+    tagline: "A Writing Copilot Living Inside WhatsApp",
+    description:
+      "A conversational AI agent that plugs into your own WhatsApp after a single QR scan. Type @correct, @translate, @formal or @reply right in a chat and the agent fixes your language mistakes, adjusts tone, translates or drafts replies — in the language you wrote in.",
+    problem:
+      "Writing quickly in a second language means typos, awkward phrasing and constant copy-pasting between WhatsApp and a separate AI app, which breaks the flow of a conversation.",
+    solution:
+      "Built a Node.js agent on top of WhatsApp Web with a message parser, a router over 10 prompt-defined agents, and low-latency Llama 3.3 70B inference through an OpenAI-compatible API. The trigger message is rewritten in place with the clean result, or the output is sent to a chosen contact from a private self-chat, so the other person never sees any AI mechanics. Strict guards process only your own messages, and the session persists so the QR is scanned once.",
+    impact:
+      "Turned the AI assistant into an invisible layer of the messaging app itself: one prefix, no context switch, and polished messages in a second. Adding a new capability takes a single prompt entry.",
+    tags: ["LLM Agents", "Prompt Engineering", "Node.js", "Groq", "Llama 3.3", "WhatsApp"],
+    category: ["ai", "agents"],
+    image: "/Projects/textpilot.svg",
+    icon: MessageSquareText,
+    featured: true,
+  },
   {
     id: "learnia",
     title: "LearNia",
@@ -94,7 +151,7 @@ const projects: Project[] = [
     github: "https://github.com/NouhaylaMouakkal/EchoSign.git",
     demo: "https://youtu.be/badtxnmgq_Y",
     icon: Eye,
-    featured: true,
+    featured: false,
   },
   {
     id: "alma-whispers",
@@ -255,6 +312,7 @@ const projects: Project[] = [
 const filterTabs: { label: string; value: ProjectCategory }[] = [
   { label: "All Projects", value: "all" },
   { label: "AI & ML", value: "ai" },
+  { label: "AI Agents", value: "agents" },
   { label: "Computer Vision", value: "cv" },
   { label: "Data Science", value: "data" },
   { label: "Web & Mobile", value: "web" },

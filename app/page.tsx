@@ -50,7 +50,7 @@ const skillCategories = [
   {
     icon: Sparkles,
     title: "GenAI & NLP",
-    items: ["LLMs", "RAG", "LangChain", "Prompt Engineering", "NLP"],
+    items: ["LLM Agents", "RAG", "MCP", "LangChain", "Prompt Engineering"],
   },
   {
     icon: Terminal,
@@ -60,6 +60,52 @@ const skillCategories = [
 ]
 
 const featuredProjects = [
+  {
+    id: "ppt-agent",
+    title: "Presentation Generation Agent",
+    tagline: "From a Conversation to a Designed, Quality-Checked Deck",
+    description:
+      "A multi-agent system that turns a short description, a JSON document or a spreadsheet into a finished, editable PowerPoint on a chosen template, then inspects its own output before handing the file back.",
+    problem: "On-brand decks are slow to produce by hand, and one-shot LLM generation invents facts and overflows slides.",
+    solution:
+      "Orchestrated a router, planner, content mapper, copy editor and vision-based design reviewer, backed by deterministic guards and a layout linter that measures text with real font metrics.",
+    impact:
+      "Editable native slides with a design-quality score and a list of missing information; new presentation types are added from a settings screen, with no code changes.",
+    tags: ["Multi-Agent", "LLM Orchestration", "Vision Review", "FastAPI"],
+    image: "/Projects/ppt-agent.svg",
+    link: "/projects",
+    featured: true,
+  },
+  {
+    id: "flowbite-agent",
+    title: "Flowbite Agent",
+    tagline: "A Conversational UI Design Agent Grounded in Documentation",
+    description:
+      "Ask for a UI component in chat and get a live preview beside copy-ready code, then refine colors, layout and variants in plain language.",
+    problem: "Generic LLMs hallucinate class names and APIs, and developers lose time hopping between docs and trial-and-error edits.",
+    solution:
+      "A tool-calling agent over a ChromaDB RAG index of the docs, live scraping and a sanitized widget builder, streamed to a Next.js UI over SSE and also exposed as an MCP server.",
+    impact: "Answers grounded in cited documentation, and generated components that are safe to render and ready to paste.",
+    tags: ["Agentic AI", "RAG", "MCP", "Next.js"],
+    image: "/Projects/flowbiteagent.svg",
+    link: "/projects",
+    featured: true,
+  },
+  {
+    id: "textpilot",
+    title: "TextPilot",
+    tagline: "A Writing Copilot Living Inside WhatsApp",
+    description:
+      "Scan a QR code once and your own WhatsApp gains an AI agent: type @correct, @translate or @formal in any chat and the clean result replaces your message.",
+    problem: "Writing fast in a second language means typos and constant copy-pasting between WhatsApp and a separate AI app.",
+    solution:
+      "A Node.js agent on WhatsApp Web with a message parser, 10 prompt-defined agents and Llama 3.3 70B inference, processing only your own messages so the other person never sees the AI.",
+    impact: "The AI becomes an invisible layer of the messaging app: one prefix, no context switch.",
+    tags: ["LLM Agents", "Prompt Engineering", "Node.js", "Groq"],
+    image: "/Projects/textpilot.svg",
+    link: "/projects",
+    featured: true,
+  },
   {
     id: "learnia",
     title: "LearNia",
@@ -90,20 +136,6 @@ const featuredProjects = [
     image: "/Projects/oklever.png",
     link: "#",
     featured: true,
-  },
-  {
-    id: "echosign",
-    title: "EchoSign",
-    tagline: "Moroccan Sign Language Translator",
-    description:
-      "Transforming Moroccan Sign Language into text and audio for seamless communication with the deaf community using computer vision and deep learning.",
-    problem: "Limited accessibility tools for Moroccan Sign Language speakers.",
-    solution: "Developed a real-time CV-based translation system using custom gesture recognition models.",
-    impact: "Bridged communication gaps and improved accessibility for the deaf community in Morocco.",
-    tags: ["Computer Vision", "TensorFlow", "Python", "Mobile"],
-    image: "/Projects/EchoSign.png",
-    link: "https://github.com/NouhaylaMouakkal/EchoSign.git",
-    featured: false,
   },
 ]
 

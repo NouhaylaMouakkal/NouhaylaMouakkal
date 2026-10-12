@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#1c1530"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <g transform="translate(52 212) scale(1.12)">
+  <circle cx="1200" cy="480" r="230" fill="#f59e0b" opacity="0.08"/>
+
+  <!-- chat -->
+  <rect x="60" y="60" width="400" height="449" rx="18" fill="#0f172a" stroke="#27334d" stroke-width="2"/>
+  <rect x="84" y="86" width="330" height="62" rx="12" fill="#1d4ed8"/>
+  <text x="100" y="112" font-size="14" fill="#fff">Prepare the steering committee</text>
+  <text x="100" y="132" font-size="14" fill="#fff">deck for project Atlas, 12 Nov</text>
+  <rect x="84" y="168" width="360" height="92" rx="12" fill="#1e293b"/>
+  <text x="100" y="192" font-size="14" fill="#e2e8f0">I need three things:</text>
+  <text x="100" y="214" font-size="13" fill="#94a3b8">1. overall status and why</text>
+  <text x="100" y="234" font-size="13" fill="#94a3b8">2. milestones  3. decisions expected</text>
+  <rect x="84" y="280" width="330" height="62" rx="12" fill="#1d4ed8"/>
+  <text x="100" y="306" font-size="14" fill="#fff">Status amber: interfaces late 3 wks…</text>
+  <rect x="84" y="362" width="360" height="110" rx="12" fill="#1e293b"/>
+  <text x="100" y="388" font-size="14" fill="#e2e8f0">Here is your deck — 8 slides</text>
+  <rect x="100" y="404" width="140" height="30" rx="8" fill="#f59e0b"/>
+  <text x="170" y="424" text-anchor="middle" font-size="13" font-weight="700" fill="#1c1530">Download .pptx</text>
+  <rect x="252" y="404" width="170" height="30" rx="15" fill="#14532d"/>
+  <text x="337" y="424" text-anchor="middle" font-size="13" font-weight="700" fill="#86efac">design check 98/100</text>
+  <text x="100" y="458" font-size="12" fill="#64748b">slide previews · missing fields: none</text>
+
+  <!-- slides -->
+  <g>
+    <rect x="520" y="60" width="360" height="203" rx="10" fill="#10264f"/>
+    <rect x="548" y="100" width="190" height="14" rx="4" fill="#f59e0b"/>
+    <rect x="548" y="128" width="280" height="10" rx="4" fill="#7291cb"/>
+    <rect x="548" y="148" width="220" height="10" rx="4" fill="#7291cb" opacity="0.6"/>
+
+    <rect x="900" y="60" width="360" height="203" rx="10" fill="#f8fafc"/>
+    <rect x="924" y="84" width="170" height="12" rx="4" fill="#10264f"/>
+    <line x1="930" y1="190" x2="1230" y2="190" stroke="#cbd5e1" stroke-width="3"/>
+    <circle cx="950" cy="190" r="9" fill="#22c55e"/><circle cx="1040" cy="190" r="9" fill="#22c55e"/>
+    <circle cx="1130" cy="190" r="9" fill="#f59e0b"/><circle cx="1220" cy="190" r="9" fill="#cbd5e1"/>
+    <rect x="924" y="124" width="60" height="26" rx="6" fill="#fde68a"/>
+
+    <rect x="520" y="290" width="360" height="203" rx="10" fill="#f8fafc"/>
+    <rect x="544" y="314" width="170" height="12" rx="4" fill="#10264f"/>
+    <rect x="560" y="410" width="36" height="60" fill="#7291cb"/>
+    <rect x="612" y="390" width="36" height="80" fill="#10264f"/>
+    <rect x="664" y="360" width="36" height="110" fill="#7291cb"/>
+    <rect x="716" y="340" width="36" height="130" fill="#10264f"/>
+    <rect x="768" y="372" width="36" height="98" fill="#f59e0b"/>
+
+    <rect x="900" y="290" width="360" height="203" rx="10" fill="#f8fafc"/>
+    <rect x="924" y="314" width="170" height="12" rx="4" fill="#10264f"/>
+    <rect x="930" y="360" width="90" height="46" rx="8" fill="#e0e7ff" stroke="#6366f1"/>
+    <rect x="1050" y="360" width="90" height="46" rx="8" fill="#e0e7ff" stroke="#6366f1"/>
+    <rect x="1170" y="360" width="70" height="46" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+    <line x1="1020" y1="383" x2="1050" y2="383" stroke="#6366f1" stroke-width="2.5"/>
+    <line x1="1140" y1="383" x2="1170" y2="383" stroke="#6366f1" stroke-width="2.5"/>
+    <rect x="930" y="430" width="300" height="10" rx="4" fill="#cbd5e1"/>
+  </g>
+  </g>
+  <text x="88" y="140" font-size="52" font-weight="800" fill="#f8fafc">Presentation Generation Agent</text>
+  <rect x="88" y="162" width="72" height="5" rx="2.5" fill="#fcd34d"/>
+  <g>
+    <rect x="88" y="862" width="171" height="40" rx="20" fill="#fcd34d" fill-opacity="0.12" stroke="#fcd34d" stroke-opacity="0.45"/>
+    <text x="173.5" y="888" text-anchor="middle" font-size="18" font-weight="600" fill="#fcd34d">Multi-Agent</text>
+    <rect x="273" y="862" width="119" height="40" rx="20" fill="#fcd34d" fill-opacity="0.12" stroke="#fcd34d" stroke-opacity="0.45"/>
+    <text x="332.5" y="888" text-anchor="middle" font-size="18" font-weight="600" fill="#fcd34d">Planner</text>
+    <rect x="406" y="862" width="197" height="40" rx="20" fill="#fcd34d" fill-opacity="0.12" stroke="#fcd34d" stroke-opacity="0.45"/>
+    <text x="504.5" y="888" text-anchor="middle" font-size="18" font-weight="600" fill="#fcd34d">Vision Review</text>
+    <rect x="617" y="862" width="119" height="40" rx="20" fill="#fcd34d" fill-opacity="0.12" stroke="#fcd34d" stroke-opacity="0.45"/>
+    <text x="676.5" y="888" text-anchor="middle" font-size="18" font-weight="600" fill="#fcd34d">FastAPI</text>
+  </g>
+</svg>
