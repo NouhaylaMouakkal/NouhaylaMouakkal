@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Nouhayla Mouakkal",
   },
   description:
-    "Senior AI Software Engineer specializing in Machine Learning, NLP, GenAI, LLMs, and full-stack development. Building intelligent products that make an impact.",
+    "AI Engineer specializing in LLM agents, RAG, Machine Learning, NLP and full-stack development. Building intelligent products that make an impact.",
   keywords: [
     "AI Engineer",
     "Machine Learning",
@@ -40,15 +40,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Nouhayla Mouakkal" }],
   creator: "Nouhayla Mouakkal",
-  metadataBase: new URL("https://nouhaylamouakkal.vercel.app"),
+  metadataBase: new URL("https://mouakkal.me"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nouhaylamouakkal.vercel.app",
+    url: "https://mouakkal.me",
     siteName: "Nouhayla Mouakkal",
     title: "Nouhayla Mouakkal — AI Engineer & Product Thinker",
     description:
-      "Senior AI Software Engineer specializing in Machine Learning, NLP, GenAI, LLMs, and full-stack development.",
+      "AI Engineer specializing in LLM agents, RAG, Machine Learning, NLP and full-stack development.",
     images: [
       {
         url: "/og-image.png",
@@ -62,13 +62,29 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nouhayla Mouakkal — AI Engineer & Product Thinker",
     description:
-      "Senior AI Software Engineer specializing in Machine Learning, NLP, GenAI, LLMs, and full-stack development.",
+      "AI Engineer specializing in LLM agents, RAG, Machine Learning, NLP and full-stack development.",
     images: ["/og-image.png"],
+  },
+  // Bing Webmaster Tools ownership check — must stay in place even after verification.
+  verification: {
+    other: { "msvalidate.01": "6039C16C5233E25CDDAA6FB538EE0264" },
   },
   robots: {
     index: true,
     follow: true,
   },
+}
+
+// Structured data so search engines connect the name to this site and its profiles.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Nouhayla Mouakkal",
+  alternateName: "Nouhayla Mouakal",
+  url: "https://mouakkal.me",
+  jobTitle: "AI Engineer",
+  sameAs: ["https://github.com/NouhaylaMouakkal", "https://www.linkedin.com/in/nouhaylamouakkal/"],
+  knowsAbout: ["LLM Agents", "RAG", "Machine Learning", "NLP", "Computer Vision", "Full Stack Development"],
 }
 
 export default function RootLayout({
@@ -79,6 +95,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans antialiased min-h-screen bg-background text-foreground selection:bg-primary/20">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <div className="relative flex min-h-screen flex-col grain">
             <Navbar />
